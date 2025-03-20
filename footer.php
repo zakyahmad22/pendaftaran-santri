@@ -27,21 +27,25 @@
                 <div class="mb-12 w-full px-4 font-medium text-slate-300 md:w-1/3">
                     <h2 class="mb-5 text-4xl font-bold text-white">Al-Muflihin</h2>
                     <h3 class="mb-2 text-2xl font-bold">Hubungi Kami</h3>
-                    <p>ahmadzakyy0210@gmail.com</p>
-                    <p>Jl. Mahoni No. 123</p>
-                    <p>Brebes</p>
+                    <p>pondokpesantrenalmuflihin@gmail.com</p>
+                    <p>Gebang Ilir, Gebang Cirebon,</p>
+                    <p>Jawa Barat</p>
                 </div>
                 <div class="mb-12 w-full px-4 md:w-1/3">
-                    <h3 class="mb-5 text-xl font-semibold text-white">Kategori Tulisan</h3>
+                    <h3 class="mb-5 text-xl font-semibold text-white">Menu</h3>
                     <ul class="text-slate-300">
                         <li>
-                            <a href="#" class="mb-3 inline-block text-base hover:text-primary">Programming</a>
+                            <a href="index.php" class="mb-3 inline-block text-base hover:text-primary">Beranda</a>
                         </li>
                         <li>
-                            <a href="#" class="mb-3 inline-block text-base hover:text-primary">Teknologi</a>
+                            <a href="tentang.php" class="mb-3 inline-block text-base hover:text-primary">Tentang</a>
                         </li>
                         <li>
-                            <a href="#" class="mb-3 inline-block text-base hover:text-primary">Gaya Hidup</a>
+                            <a href="pendaftaran.php"
+                                class="mb-3 inline-block text-base hover:text-primary">Pendaftaran</a>
+                        </li>
+                        <li>
+                            <a href="informasi.php" class="mb-3 inline-block text-base hover:text-primary">Informasi</a>
                         </li>
                     </ul>
                 </div>
@@ -49,22 +53,10 @@
                     <h3 class="mb-5 text-xl font-semibold text-white">Tautan</h3>
                     <ul class="text-slate-300">
                         <li>
-                            <a href="#home" class="mb-3 inline-block text-base hover:text-primary">Beranda</a>
+                            <a href="login.php" class="mb-3 inline-block text-base hover:text-primary">Login</a>
                         </li>
                         <li>
-                            <a href="#about" class="mb-3 inline-block text-base hover:text-primary">Tentang Saya</a>
-                        </li>
-                        <li>
-                            <a href="#portfolio" class="mb-3 inline-block text-base hover:text-primary">Portfolio</a>
-                        </li>
-                        <li>
-                            <a href="#clients" class="mb-3 inline-block text-base hover:text-primary">Clients</a>
-                        </li>
-                        <li>
-                            <a href="#blog" class="mb-3 inline-block text-base hover:text-primary">Blog</a>
-                        </li>
-                        <li>
-                            <a href="#contact" class="mb-3 inline-block text-base hover:text-primary">Contact</a>
+                            <a href="register.php" class="mb-3 inline-block text-base hover:text-primary">Registrasi</a>
                         </li>
                     </ul>
                 </div>
@@ -73,7 +65,7 @@
             <div class="w-full border-t border-slate-700 pt-10">
                 <div class="mb-5 flex items-center justify-center">
                     <!-- Youtube -->
-                    <a href="https://www.youtube.com/@zaky_art118channel8" target="_blank"
+                    <a href="https://www.youtube.com/@almuflihincirebon7929" target="_blank"
                         class="mr-3 flex h-9 w-9 items-center justify-center rounded-full border border-slate-300 text-slate-300 hover:border-primary hover:bg-primary hover:text-white">
                         <svg role="img" width="20" class="fill-current" viewBox="0 0 24 24"
                             xmlns="http://www.w3.org/2000/svg">
@@ -84,7 +76,7 @@
                     </a>
 
                     <!-- Instagram -->
-                    <a href="https://www.instagram.com/ahmadzaky118/" target="_blank"
+                    <a href="https://www.instagram.com/almuflihin_cirebon?igshid=MzRlODBiNWFlZA%3D%3D" target="_blank"
                         class="mr-3 flex h-9 w-9 items-center justify-center rounded-full border border-slate-300 text-slate-300 hover:border-primary hover:bg-primary hover:text-white">
                         <svg role="img" width="20" class="fill-current" viewBox="0 0 24 24"
                             xmlns="http://www.w3.org/2000/svg">
@@ -95,7 +87,7 @@
                     </a>
 
                     <!-- Twitter -->
-                    <a href="https://twitter.com/sandhikagalih" target="_blank"
+                    <a href="https://twitter.com/almuflihin_crb" target="_blank"
                         class="mr-3 flex h-9 w-9 items-center justify-center rounded-full border border-slate-300 text-slate-300 hover:border-primary hover:bg-primary hover:text-white">
                         <svg role="img" width="20" class="fill-current" viewBox="0 0 24 24"
                             xmlns="http://www.w3.org/2000/svg">
@@ -106,7 +98,8 @@
                     </a>
 
                     <!-- TikTok -->
-                    <a href="https://www.tiktok.com/@ahmadzaky1933?_t=8q3obFCFYzH&_r=1" target="_blank"
+                    <a href="https://www.tiktok.com/@almuflihin_cirebon?lang=id-id&is_from_webapp=1&sender_device=mobile&sender_web_id=7192400905366537729"
+                        target="_blank"
                         class="mr-3 flex h-9 w-9 items-center justify-center rounded-full border border-slate-300 text-slate-300 hover:border-primary hover:bg-primary hover:text-white">
                         <svg role="img" width="20" class="fill-current" viewBox="0 0 24 24"
                             xmlns="http://www.w3.org/2000/svg">
@@ -117,7 +110,7 @@
                     </a>
 
                     <!-- LinkedIn -->
-                    <a href="https://linkedin.com/in/sandhikagalih" target="_blank"
+                    <!-- <a href="#" target="_blank"
                         class="mr-3 flex h-9 w-9 items-center justify-center rounded-full border border-slate-300 text-slate-300 hover:border-primary hover:bg-primary hover:text-white">
                         <svg role="img" width="20" class="fill-current" viewBox="0 0 24 24"
                             xmlns="http://www.w3.org/2000/svg">
@@ -125,12 +118,12 @@
                             <path
                                 d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
                         </svg>
-                    </a>
+                    </a> -->
                 </div>
                 <p class="text-center text-xs font-medium text-slate-500">
-                    Dibuat <span class="text-pink-500"></span> oleh <a href="https://instagram.com/sandhikagalih"
-                        target="_blank" class="font-bold text-primary">Ahmad Zaky</a>, menggunakan
-                    <a href="https://tailwindcss.com" target="_blank" class="font-bold text-sky-500">Tailwind CSS</a>.
+                    &copy; Pondok <span class="text-pink-500"></span> Pesantren <a href="#" target="_blank"
+                        class="font-bold text-primary">Al-Muflihin</a> | Gebang Ilir, Gebang, Cirebon
+                    <a href="#" target="_blank" class="font-bold text-sky-500">Jawa Barat</a>.
                 </p>
             </div>
         </div>

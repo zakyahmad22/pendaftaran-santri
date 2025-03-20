@@ -4,9 +4,21 @@ include 'header.php';
 
 <!-- Content Start -->
 <section id="about" class="pt-36 pb-32 dark:bg-dark">
+    <!-- Page Title -->
+    <div class="bg-gray-100 dark:bg-dark py-16" data-aos="fade">
+        <div class="container mx-auto px-4 max-w-3xl lg:max-w-5xl">
+            <div class="breadcrumbs text-secondary dark:text-white pb-3">
+                <ol class="flex space-x-2 text-sm px-4">
+                    <li><a href="index.php" class="hover:text-primary">Beranda |</a></li>
+                    <li class="current text-primary">Tentang</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+    <!-- End Page Title -->
     <div class="container mx-auto flex flex-wrap items-center">
         <!-- Teks -->
-        <div class="mb-10 w-full px-4 lg:w-1/2">
+        <div class="text-justify mb-10 mt-3 w-full px-4 lg:w-1/2">
             <h4 class="mb-3 text-lg font-bold uppercase text-primary">Sejarah Tentang</h4>
             <h2 class="mb-5 text-3xl font-bold text-dark dark:text-white lg:text-4xl">
                 Pondok Pesantren <br> Al-Muflihin
@@ -32,7 +44,7 @@ include 'header.php';
                 class="mx-auto max-w-full rounded-lg shadow-lg">
         </div>
         <!-- Teks -->
-        <div class="mb-10 w-full px-4 lg:w-1/2">
+        <div class="mt-10 mb-10 w-full px-4 lg:w-1/2">
             <h4 class="mb-3 text-lg font-bold uppercase text-primary">Visi & Misi</h4>
             <h2 class="mb-5 text-3xl font-bold text-dark dark:text-white lg:text-4xl">
                 Pondok Pesantren <br> Al-Muflihin
@@ -48,7 +60,7 @@ include 'header.php';
 
     <div class="container mx-auto flex flex-wrap items-center">
         <!-- Teks -->
-        <div class="mb-10 w-full px-4 lg:w-1/2">
+        <div class="mb-10 mt-10 w-full px-4 lg:w-1/2">
             <h4 class="mb-3 text-lg font-bold uppercase text-primary">Fasilitas</h4>
             <h2 class="mb-5 text-3xl font-bold text-dark dark:text-white lg:text-4xl">
                 Pondok Pesantren <br> Al-Muflihin
@@ -56,7 +68,8 @@ include 'header.php';
             <p class="text-base font-medium text-secondary lg:text-lg">
                 Fasilitas yang dimiliki Pondok Pesantren Al Muflihin antara lain: Asrama, Masjid, Ruang Kelas, Ruang
                 Perpustakaan, Ruang Makan, Lapangan Olahraga, dan lain-lain. Fasilitas yang dimiliki Pondok Pesantren Al
-                Muflihin antara lain: Asrama, Masjid, Ruang Kelas, Ruang Perpustakaan, Ruang Makan, Lapangan Olahraga, dan
+                Muflihin antara lain: Asrama, Masjid, Ruang Kelas, Ruang Perpustakaan, Ruang Makan, Lapangan Olahraga,
+                dan
                 lain-lain.
             </p>
         </div>

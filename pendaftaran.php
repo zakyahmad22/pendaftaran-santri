@@ -2,7 +2,7 @@
 include 'header.php';
 ?>
 
-<section id="contact" class="pt-36 pb-32 dark:bg-slate-800">
+<section id="contact" class="pt-36 pb-32 dark:bg-dark">
     <div class="container">
         <div class="w-full px-4">
             <div class="mx-auto mb-16 max-w-xl text-center">

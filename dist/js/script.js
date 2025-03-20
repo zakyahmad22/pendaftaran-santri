@@ -14,7 +14,7 @@ window.onscroll = function () {
     toTop.classList.add('hidden');
   }
 };
- 
+
 // Hamburger
 const hamburger = document.querySelector('#hamburger');
 const navMenu = document.querySelector('#nav-menu');

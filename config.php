@@ -1,13 +1,14 @@
 <?php
-$host = 'localhost';      // Host database
-$username = 'root';       // Username database
-$password = '';           // Password database
-$dbname = 'ppdb_pondok';  // Nama database
+$host = 'localhost';
+$username = 'root';
+$password = '';
+$dbname = 'ppdb_pondok';
 
-try {
-    $conn = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch (PDOException $e) {
-    die("Koneksi database gagal: " . $e->getMessage());
+// Buat koneksi MySQLi
+$mysqli = new mysqli($host, $username, $password, $dbname);
+
+// Periksa koneksi
+if ($mysqli->connect_error) {
+    die("Koneksi database gagal: " . $mysqli->connect_error);
 }
 ?>
