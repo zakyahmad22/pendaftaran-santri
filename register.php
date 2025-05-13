@@ -42,19 +42,33 @@ include 'header.php';
                     <div class="breadcrumbs text-secondary dark:text-white">
                         <ol class="flex space-x-2 text-sm px-1 pb-5">
                             <li><a href="index.php" class="hover:text-primary">Beranda |</a></li>
-                            <li class="current text-primary">Register</li>
+                            <li class="current text-primary">Registrasi User</li>
                         </ol>
                     </div>
                 </div>
                 <!-- End Page Title -->
+
+                <style>
+                    .fade-in-up {
+                        opacity: 0;
+                        transform: translateY(30px);
+                        transition: all 0.6s ease-out;
+                    }
+
+                    .fade-in-up.show {
+                        opacity: 1;
+                        transform: translateY(0);
+                    }
+                </style>
+
                 <!-- Gambar Registrasi (Hanya tampil di desktop) -->
-                <div class="hidden md:block md:w-1/2 bg-cover bg-center min-h-screen"
+                <div class="hidden md:block md:w-1/2 bg-cover bg-center min-h-screen fade-in-up"
                     style="background-image: url('dist/img/logo2.png');"></div>
 
                 <!-- Form Registrasi -->
-                <div class="w-full md:w-1/2 p-3 mb-12 px-5">
+                <div class="w-full md:w-1/2 p-3 mb-12 px-5 fade-in-up">
                     <form method="POST" action="proses/proses_register.php" class="space-y-6">
-                        <h1 class="text-dark dark:text-white text-3xl font-bold mb-8">Halaman Registrasi</h1>
+                        <h1 class="text-dark dark:text-white text-3xl font-bold mb-8">Registrasi User</h1>
 
                         <!-- Input Username -->
                         <div>
@@ -103,6 +117,24 @@ include 'header.php';
 
     <!-- Footer -->
     <?php include 'footer.php'; ?>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const targets = document.querySelectorAll('.fade-in-up');
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('show');
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+
+            targets.forEach(el => observer.observe(el));
+        });
+    </script>
 
 </body>
 

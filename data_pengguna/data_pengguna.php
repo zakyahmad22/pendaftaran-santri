@@ -57,7 +57,7 @@ if (!$result) {
                 // Jika setuju, lanjutkan dengan penghapusan pengguna
                 window.location.href = "data_pengguna.php?action=delete&id=" + id;
             }
-        }
+        }   
     </script>
 </head>
 
@@ -113,11 +113,11 @@ if (!$result) {
 
             </div>
         </div>
-
-
-        <footer class="text-dark p-4 text-center fixed bottom-0">
+        <footer class="text-dark p-4 text-center bottom-0">
             &copy; 2025 Pondok Pesantren Al-Muflihin | Gebang Ilir, Gebang, Cirebon Jawa Barat.
         </footer>
+
+
     </section>
 
     <?php

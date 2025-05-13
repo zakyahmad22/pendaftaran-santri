@@ -8,6 +8,7 @@
     <title>Pendaftaran Santri Baru</title>
     <link href="dist/css/final.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="icon" href="dist/img/logo.png" type="image/icon">
 
     <script>
         if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
@@ -21,13 +22,14 @@
 <body>
 
     <!-- Header Start -->
-    <header class="absolute top-0 left-0 z-10 flex w-full items-center bg-transparent">
+    <header class="fixed top-0 left-0 z-10 flex w-full items-center bg-transparent">
         <div class="container">
             <div class="relative flex items-center justify-between">
                 <div class="flex items-center">
                     <!-- <img src="dist/img/logo1.png" alt="Logo Al Muflihin" width="150" height="150" class="h-10 w-10 mr-2" /> -->
-                    <img src="/pendaftaran-santri/dist/img/logo.png" alt="Logo Al Muflihin" width="50" height="50" class="h-10 w-10" />
-                    <a href="#home" class="block py-6 text-lg font-bold text-primary">Al Muflihin</a>
+                    <img src="/pendaftaran-santri/dist/img/logo.png" alt="Logo Al Muflihin" width="50" height="50"
+                        class="max-w-full h-auto" />
+                    <a href="index.php" class="block py-6 text-lg font-bold text-primary">Al Muflihin</a>
                 </div>
                 <div class="flex items-center">
                     <button id="hamburger" name="hamburger" type="button" class="absolute right-4 block lg:hidden">
@@ -62,7 +64,7 @@
                             <!-- Tambahkan ID ke button dan dropdown -->
                             <li class="relative">
                                 <button id="contactDropdownBtn"
-                                    class="mx-8 flex py-2 text-base text-dark group-hover:text-primary dark:text-white">
+                                    class="mx-8 flex py-2 text-base text-dark group-hover:text-primary dark:text-white z-50 ">
                                     Akun
                                     <svg class="w-4 h-4 ml-1 mt-1" xmlns="http://www.w3.org/2000/svg"
                                         viewBox="0 0 20 20" fill="currentColor">
@@ -74,11 +76,17 @@
 
                                 <!-- Dropdown Menu -->
                                 <ul id="contactDropdown"
-                                    class="absolute left-0 mt-2 hidden w-48 rounded-md bg-white shadow-lg opacity-0 transition-opacity duration-300 dark:bg-dark">
+                                    class="absolute left-0 right-0 mt-2 hidden w-48 rounded-md bg-white shadow-lg opacity-0 transition-opacity duration-300 z-50 dark:bg-dark">
+                                    <li class="group">
+                                        <a href="/pendaftaran-santri/admin/login_admin.php"
+                                            class="mx-8 flex py-2 text-base text-dark group-hover:text-primary dark:text-white">
+                                            Login Admin
+                                        </a>
+                                    </li>
                                     <li class="group">
                                         <a href="/pendaftaran-santri/login.php"
                                             class="mx-8 flex py-2 text-base text-dark group-hover:text-primary dark:text-white">
-                                            Login
+                                            Login User
                                         </a>
                                     </li>
                                     <li class="group">

@@ -9,29 +9,26 @@ include 'header.php';
 <!-- Swiper JS -->
 <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 
-
 <!-- Hero Section Start -->
-<section id="home" class="pt-36 pb-32 dark:bg-dark">
+<section id="home" class="pt-36 dark:bg-dark">
   <div class="container">
     <div class="flex flex-wrap">
-      <div class="w-full self-center px-4 lg:w-1/2">
+      <div class="w-full self-center px-4 lg:w-1/2 opacity-0 translate-y-10 transition-all duration-1000 ease-out"
+        id="heroText">
         <h1 class="text-base font-semibold text-primary md:text-xl">Pendaftaran Santri Baru<span
             class="mt-1 block text-4xl font-bold text-dark dark:text-white lg:text-5xl">Pondok Pesantren Al-Muflihin
           </span></h1>
-        <!-- <h2 class="mb-5 text-lg font-medium text-secondary lg:text-2xl">Cirebon <span
-              class="text-dark dark:text-white">Jawa Barat</span></h2> -->
-        <!-- <p class="mb-10 font-medium leading-relaxed text-secondary">Belajar web devlopment itu mudah dan menyenangkan
-            <span class="font-bold text-dark dark:text-white">bukan!</span> -->
         <p class="mb-10 font-medium leading-relaxed text-secondary">Tahun Ajaran 2025/2026 <span
             class="font-bold text-dark dark:text-white">membuka pendaftaran santri baru.</span>
           Daftar Sekarang!</span>
         </p>
-
         <a href="form_pendaftaran.php"
           class="rounded-full bg-primary py-3 px-8 text-base font-semibold text-white transition duration-300 ease-in-out hover:opacity-80 hover:shadow-lg">Daftar
           Sekarang</a>
       </div>
-      <div class="w-full self-end px-4 lg:w-1/2">
+      <div
+        class="w-full self-end px-4 lg:w-1/2 opacity-0 translate-y-10 transition-all duration-1000 ease-out delay-200"
+        id="heroImage">
         <div class="relative mt-10 lg:right-0 lg:mt-9">
           <img src="dist/img/santri6.png" alt="santri2" width="400" height="400"
             class="relative z-10 mx-auto max-w-full" />
@@ -53,7 +50,7 @@ include 'header.php';
 <section id="about" class="pt-10 pb-10 dark:bg-dark">
   <div class="container">
     <div class="flex flex-wrap">
-      <div class="mb-10 w-full px-4 lg:w-1/2">
+      <div class="mb-10 w-full px-4 lg:w-1/2 opacity-0 translate-y-10 transition-all duration-700" data-animate>
         <h4 class="mb-3 text-lg font-bold uppercase text-primary">Tentang Kami</h4>
         <h2 class="mb-5 max-w-md text-3xl font-bold text-dark dark:text-white lg:text-4xl">Pendaftaran Santri Baru
         </h2>
@@ -61,7 +58,7 @@ include 'header.php';
           kesempatan bagi generasi muda untuk belajar ilmu agama dan umum. Segera daftarkan
           diri Anda dan jadilah bagian dari keluarga besar kami!</p>
       </div>
-      <div class="w-full px-4 lg:w-1/2">
+      <div class="w-full px-4 lg:w-1/2 opacity-0 translate-y-10 transition-all duration-700" data-animate>
         <h3 class="mb-4 text-2xl font-semibold text-dark dark:text-white lg:pt-10 lg:text-3xl">Hubungi Kami</h3>
         <p class="mb-6 text-base font-medium text-secondary lg:text-lg">
           Untuk informasi lebih lanjut mengenai pendaftaran atau informasi terkait Pondok Pesantren Al-Muflihin,
@@ -110,16 +107,6 @@ include 'header.php';
                 d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z" />
             </svg>
           </a>
-
-          <!-- LinkedIn -->
-          <!-- <a href="#" target="_blank"
-            class="mr-3 flex h-9 w-9 items-center justify-center rounded-full border border-slate-300 text-slate-300 hover:border-primary hover:bg-primary hover:text-white">
-            <svg role="img" width="20" class="fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <title>LinkedIn</title>
-              <path
-                d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-            </svg>
-          </a> -->
         </div>
       </div>
     </div>
@@ -127,92 +114,83 @@ include 'header.php';
 </section>
 <!-- About Section End -->
 
-<section id="about" class="pt-10 pb-10 dark:bg-dark">
-  <div class="container mx-auto flex flex-wrap items-center">
-    <!-- Teks -->
-    <div class="mb-10 w-full px-4 lg:w-1/2">
-      <h4 class="mb-3 text-lg font-bold uppercase text-primary">Sejarah Tentang</h4>
-      <h2 class="mt-1 block text-4xl font-bold text-dark dark:text-white lg:text-5xl">
-        Pondok Pesantren <br> Al-Muflihin
-      </h2>
-      <p class="text-base font-medium text-secondary lg:text-lg">
-        Al Muflihin adalah Pondok Pesantren Modern dengan manhaj Darunnajah dan Gontor yang menyelenggarakan
-        pendidikan untuk megembangkan seluruh poetensi para santri secara menyeluruh meliputi pembinaan skill,
-        keserdasan, intelektual, kematangan emosi, dan sikap yang taat kepada Allah SWT. Al Muflihin adalah
-        Pondok Pesantren Modern dengan manhaj Darunnajah dan Gontor.
-      </p>
-    </div>
-    <!-- Gambar -->
-    <div class="w-full px-4 lg:w-1/2">
-      <img src="dist/img/informasi2.JPG" alt="Informasi Al-Muflihin" class="mx-auto max-w-full rounded-lg shadow-lg">
-    </div>
-  </div>
-</section>
-
-
 <!-- falsafah start -->
+
+<style>
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease;
+  }
+
+  .reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+
 <section id="about" class="pt-10 pb-10 dark:bg-dark">
   <div class="bg-slate-100 pt-10 pb-10 dark:bg-dark">
     <div class="container mx-auto text-center">
-      <h1 class="mb-4 text-3xl font-bold text-dark dark:text-white sm:text-4xl lg:text-5xl">Falsafah Pondok</h1>
-      <p class="text-md font-medium text-secondary md:text-lg">
+      <h1 class="mb-4 text-3xl font-bold text-dark dark:text-white sm:text-4xl lg:text-5xl reveal">Falsafah Pondok</h1>
+      <p class="text-md font-medium text-secondary md:text-lg reveal">
         Al Muflihin adalah Pondok Pesantren Modern dengan manhaj Darunnajah dan Gontor yang
         menyelenggarakan pendidikan untuk mengembangkan seluruh potensi para santri secara menyeluruh.
       </p>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8">
         <!-- Kolom 1: Panca Jiwa -->
-        <div class="bg-white p-6 rounded-lg shadow-md">
+        <div class="bg-white p-6 rounded-lg shadow-md reveal">
           <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor"
             class="bi bi-file-earmark-text-fill mx-auto" viewBox="0 0 16 16">
             <path
               d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0M9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1M4.5 9a.5.5 0 0 1 0-1h7a.5.5 0 0 1 0 1zM4 10.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5m.5 2.5a.5.5 0 0 1 0-1h4a.5.5 0 0 1 0 1z" />
           </svg>
-          <h2 class="text-2xl font-bold font-sans mt-4">Panca Jiwa</h2>
-          <p class="mt-2">
+          <h2 class="text-2xl font-bold font-sans mt-4 reveal">Panca Jiwa</h2>
+          <p class="mt-2 reveal">
             Seluruh kehidupan di Pondok Modern Al Muflihin didasarkan pada nilai-nilai kehidupan dalam
             Panca Jiwa.
           </p>
           <a href="pancajiwa.php">
             <button
-              class="rounded-full bg-primary mt-4 py-2 px-6 text-base font-semibold text-white transition duration-300 ease-in-out hover:opacity-80 hover:shadow-lg">
+              class="rounded-full bg-primary mt-4 py-2 px-6 text-base font-semibold text-white transition duration-300 ease-in-out hover:opacity-80 hover:shadow-lg reveal">
               Baca Selengkapnya
             </button>
           </a>
         </div>
 
         <!-- Kolom 2: Motto Pondok -->
-        <div class="bg-white p-6 rounded-lg shadow-md">
+        <div class="bg-white p-6 rounded-lg shadow-md reveal">
           <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor"
             class="bi bi-chat-square-text-fill mx-auto" viewBox="0 0 16 16">
             <path
               d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-2.5a1 1 0 0 0-.8.4l-1.9 2.533a1 1 0 0 1-1.6 0L5.3 12.4a1 1 0 0 0-.8-.4H2a2 2 0 0 1-2-2zm3.5 1a.5.5 0 0 0 0 1h9a.5.5 0 0 0 0-1zm0 2.5a.5.5 0 0 0 0 1h9a.5.5 0 0 0 0-1zm0 2.5a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1z" />
           </svg>
-          <h2 class="text-2xl font-bold font-sans mt-4">Motto Pondok</h2>
-          <p class="mt-2">
+          <h2 class="text-2xl font-bold font-sans mt-4 reveal">Motto Pondok</h2>
+          <p class="mt-2 reveal">
             Pendidikan Pondok Modern Al Muflihin menekankan pada pembentukan pribadi mukmin muslim.
           </p>
           <a href="mottopondok.php">
             <button
-              class="rounded-full bg-primary mt-4 py-2 px-6 text-base font-semibold text-white transition duration-300 ease-in-out hover:opacity-80 hover:shadow-lg">
+              class="rounded-full bg-primary mt-4 py-2 px-6 text-base font-semibold text-white transition duration-300 ease-in-out hover:opacity-80 hover:shadow-lg reveal">
               Baca Selengkapnya
             </button>
           </a>
         </div>
 
         <!-- Kolom 3: Visi & Misi -->
-        <div class="bg-white p-6 rounded-lg shadow-md">
+        <div class="bg-white p-6 rounded-lg shadow-md reveal">
           <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor"
             class="bi bi-bag-dash-fill mx-auto" viewBox="0 0 16 16">
             <path fill-rule="evenodd"
               d="M10.5 3.5a2.5 2.5 0 0 0-5 0V4h5zm1 0V4H15v10a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V4h3.5v-.5a3.5 3.5 0 1 1 7 0M6 9.5a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1z" />
           </svg>
-          <h2 class="text-2xl font-bold font-sans mt-4">Visi & Misi</h2>
-          <p class="mt-2">
+          <h2 class="text-2xl font-bold font-sans mt-4 reveal">Visi & Misi</h2>
+          <p class="mt-2 reveal">
             Panca Jangka merupakan program kerja Pondok untuk mewujudkan upaya pengembangan dan pemajuan.
           </p>
           <a href="visimisi.php">
             <button
-              class="rounded-full bg-primary mt-4 py-2 px-6 text-base font-semibold text-white transition duration-300 ease-in-out hover:opacity-80 hover:shadow-lg">
+              class="rounded-full bg-primary mt-4 py-2 px-6 text-base font-semibold text-white transition duration-300 ease-in-out hover:opacity-80 hover:shadow-lg reveal">
               Baca Selengkapnya
             </button>
           </a>
@@ -220,70 +198,32 @@ include 'header.php';
       </div>
     </div>
 </section>
-</div>
 <!-- falsafah end -->
 
 <!-- Clients Section Start -->
-<section id="clients" class="bg-slate-800 pt-36 pb-32 dark:bg-slate-300">
+<section id="clients" class="bg-slate-800 pt-36 pb-32 dark:bg-slate-300 reveal">
   <div class="container">
     <div class="w-full px-4">
-      <div class="mx-auto mb-16 text-center">
-        <h4 class="mb-2 text-3xl font-semibold text-primary">Pendaftaran Santri Baru</h4>
-        <h2 class="mb-4 text-3xl font-bold text-white dark:text-dark sm:text-4xl lg:text-5xl">Pondok Pesantren
-          Al-Muflihin</h2>
+      <div class="mx-auto mb-16 text-center reveal">
+        <h4 class="mb-2 text-3xl font-semibold text-primary reveal">Pendaftaran Santri Baru</h4>
+        <h2 class="mb-4 text-3xl font-bold text-white dark:text-dark sm:text-4xl lg:text-5xl reveal">
+          Pondok Pesantren Al-Muflihin
         </h2>
-        <p class="text-md font-medium text-secondary md:text-lg">"Bergabunglah bersama keluarga besar Pondok Pesantren
-          Al-Muflihin dan jadilah bagian dari generasi islami yang
-          berprestasi dan berakhlakul karimah."</p>
+        <p class="text-md font-medium text-secondary md:text-lg reveal">
+          "Bergabunglah bersama keluarga besar Pondok Pesantren Al-Muflihin dan jadilah bagian dari generasi islami yang
+          berprestasi dan berakhlakul karimah."
+        </p>
       </div>
     </div>
-
   </div>
 </section>
 <!-- Clients Section End -->
 
 
 <!-- Alumni section Start -->
-<style>
-  .swiper-button-next,
-  .swiper-button-prev {
-    color: #4F46E5;
-    /* Warna tombol */
-    background-color: rgba(255, 255, 255, 0.8);
-    /* Latar belakang tombol */
-    width: 40px;
-    /* Lebar tombol */
-    height: 40px;
-    /* Tinggi tombol */
-    border-radius: 50%;
-    /* Membuat tombol bulat */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    /* Efek shadow */
-  }
-
-  .swiper-button-next::after,
-  .swiper-button-prev::after {
-    font-size: 20px;
-    /* Ukuran ikon */
-  }
-
-  .swiper-button-next {
-    right: 10px;
-    /* Posisi tombol next */
-  }
-
-  .swiper-button-prev {
-    left: 10px;
-    /* Posisi tombol previous */
-  }
-</style>
-
 <section id="contact" class="bg-slate-100 pt-36 pb-16 dark:bg-slate-800 m-0 p-0 overflow-hidden">
   <div class="w-full px-4">
-    <div class="mx-auto mb-16 max-w-xl text-center">
+    <div class="mx-auto mb-16 max-w-xl text-center reveal">
       <h2 class="mb-4 text-3xl font-bold text-dark dark:text-white sm:text-4xl lg:text-5xl">
         <span class="mb-4 text-3xl font-bold sm:text-4xl lg:text-5xl text-primary">Alumni</span> Pondok Pesantren
         Al-Muflihin
@@ -293,13 +233,14 @@ include 'header.php';
         pendaftaran santri baru, program pendidikan, jadwal kegiatan, dan fasilitas pondok.
       </p>
     </div>
-    <div class="flex justify-center items-center">
-      <div class="bg-white shadow-lg rounded-lg w-full max-w-2xl relative">
+
+    <div class="flex justify-center items-center reveal">
+      <div class="bg-white shadow-lg rounded-lg w-full max-w-2xl relative reveal">
         <!-- Swiper -->
-        <div class="swiper-container">
+        <div class="swiper-container reveal">
           <div class="swiper-wrapper">
             <!-- Slide 1 -->
-            <div class="swiper-slide">
+            <div class="swiper-slide reveal">
               <div class="flex">
                 <div class="w-1/2 bg-gray-200 rounded-l-lg">
                   <img src="dist/img/zaky3.png" alt="Profile Image" class="w-full h-full object-cover rounded-l-lg" />
@@ -315,8 +256,9 @@ include 'header.php';
                 </div>
               </div>
             </div>
+
             <!-- Slide 2 -->
-            <div class="swiper-slide">
+            <div class="swiper-slide reveal">
               <div class="flex">
                 <div class="w-1/2 bg-gray-200 rounded-l-lg">
                   <img src="dist/img/zaky3.png" alt="Profile Image" class="w-full h-full object-cover rounded-l-lg" />
@@ -332,8 +274,9 @@ include 'header.php';
                 </div>
               </div>
             </div>
+
             <!-- Slide 3 -->
-            <div class="swiper-slide">
+            <div class="swiper-slide reveal">
               <div class="flex">
                 <div class="w-1/2 bg-gray-200 rounded-l-lg">
                   <img src="dist/img/zaky3.png" alt="Profile Image" class="w-full h-full object-cover rounded-l-lg" />
@@ -351,33 +294,35 @@ include 'header.php';
             </div>
           </div>
           <!-- Add Pagination -->
-          <div class="swiper-pagination"></div>
+          <div class="swiper-pagination reveal"></div>
         </div>
-        <!-- Tombol Navigasi Kiri dan Kanan -->
-        <div class="swiper-button-next"></div>
-        <div class="swiper-button-prev"></div>
+
+        <!-- Tombol Navigasi -->
+        <div class="swiper-button-next reveal"></div>
+        <div class="swiper-button-prev reveal"></div>
       </div>
     </div>
   </div>
 </section>
+
 
 <!-- Alumni section end -->
 
 <!-- Contact Section Start -->
 <section id="contact" class="pt-10 pb-10 bg-slate-100 dark:bg-slate-800">
   <div class="container mx-auto text-center">
-    <h2 class="mb-4 text-3xl font-bold text-dark dark:text-white sm:text-4xl lg:text-5xl">
+    <h2 class="mb-4 text-3xl font-bold text-dark dark:text-white sm:text-4xl lg:text-5xl reveal">
       <span class="mb-4 text-3xl font-bold sm:text-4xl lg:text-5xl text-primary">Hubungi</span> Kami
     </h2>
-    <p class="text-md font-medium text-secondary md:text-lg">
+    <p class="text-md font-medium text-secondary md:text-lg reveal">
       Al Muflihin adalah Pondok Pesantren Modern dengan manhaj Darunnajah dan Gontor yang menyelenggarakan
       pendidikan untuk mengembangkan seluruh potensi para santri secara menyeluruh meliputi pembinaan skill,
       kecerdasan intelektual, kematangan emosi, dan sikap yang taat kepada Allah SWT.
     </p>
-    <div class="flex justify-center flex-wrap gap-4 mt-10">
+    <div class="flex justify-center flex-wrap gap-4 mt-10 reveal">
       <!-- Card 1 -->
-      <div class="bg-white dark:bg-slate-700 p-4 rounded-lg shadow-md text-center w-64">
-        <div class="mb-3">
+      <div class="bg-white dark:bg-slate-700 p-4 rounded-lg shadow-md text-center w-64 reveal">
+        <div class="mb-3 reveal">
           <svg xmlns="http://www.w3.org/2000/svg" width="150" height="150"
             class="mx-auto text-slate-500 dark:text-slate-300" fill="currentColor" viewBox="0 0 16 16">
             <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0" />
@@ -385,9 +330,9 @@ include 'header.php';
               d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1" />
           </svg>
         </div>
-        <h4 class="text-lg font-semibold text-slate-800 dark:text-white">Contact 1</h4>
-        <p class="text-secondary">Front End Developer</p>
-        <div class="flex justify-center space-x-3 mt-3">
+        <h4 class="text-lg font-semibold text-slate-800 dark:text-white reveal">Contact 1</h4>
+        <p class="text-secondary reveal">Front End Developer</p>
+        <div class="flex justify-center space-x-3 mt-3 reveal">
           <!-- Youtube -->
           <a href="https://www.youtube.com/@almuflihincirebon7929" target="_blank"
             class="mr-3 flex h-9 w-9 items-center justify-center rounded-full border border-slate-300 text-slate-300 hover:border-primary hover:bg-primary hover:text-white">
@@ -432,8 +377,8 @@ include 'header.php';
       </div>
 
       <!-- Card 2 -->
-      <div class="bg-white dark:bg-slate-700 p-4 rounded-lg shadow-md text-center w-64">
-        <div class="mb-3">
+      <div class="bg-white dark:bg-slate-700 p-4 rounded-lg shadow-md text-center w-64 reveal">
+        <div class="mb-3 reveal">
           <svg xmlns="http://www.w3.org/2000/svg" width="150" height="150"
             class="mx-auto text-slate-500 dark:text-slate-300" fill="currentColor" viewBox="0 0 16 16">
             <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0" />
@@ -441,9 +386,9 @@ include 'header.php';
               d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1" />
           </svg>
         </div>
-        <h4 class="text-lg font-semibold text-slate-800 dark:text-white">Contact 1</h4>
-        <p class="text-secondary">Back End Developer</p>
-        <div class="flex justify-center space-x-3 mt-3">
+        <h4 class="text-lg font-semibold text-slate-800 dark:text-white reveal">Contact 1</h4>
+        <p class="text-secondary reveal">Back End Developer</p>
+        <div class="flex justify-center space-x-3 mt-3 reveal">
           <!-- Youtube -->
           <a href="https://www.youtube.com/@almuflihincirebon7929" target="_blank"
             class="mr-3 flex h-9 w-9 items-center justify-center rounded-full border border-slate-300 text-slate-300 hover:border-primary hover:bg-primary hover:text-white">
@@ -488,8 +433,8 @@ include 'header.php';
       </div>
 
       <!-- Card 3 -->
-      <div class="bg-white dark:bg-slate-700 p-4 rounded-lg shadow-md text-center w-64">
-        <div class="mb-3">
+      <div class="bg-white dark:bg-slate-700 p-4 rounded-lg shadow-md text-center w-64 reveal">
+        <div class="mb-3 reveal">
           <svg xmlns="http://www.w3.org/2000/svg" width="150" height="150"
             class="mx-auto text-slate-500 dark:text-slate-300" fill="currentColor" viewBox="0 0 16 16">
             <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0" />
@@ -497,9 +442,9 @@ include 'header.php';
               d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1" />
           </svg>
         </div>
-        <h4 class="text-lg font-semibold text-slate-800 dark:text-white">Contact 1</h4>
-        <p class="text-secondary">Full Stack Developer</p>
-        <div class="flex justify-center space-x-3 mt-3">
+        <h4 class="text-lg font-semibold text-slate-800 dark:text-white reveal">Contact 1</h4>
+        <p class="text-secondary reveal">Full Stack Developer</p>
+        <div class="flex justify-center space-x-3 mt-3 reveal">
           <!-- Youtube -->
           <a href="https://www.youtube.com/@almuflihincirebon7929" target="_blank"
             class="mr-3 flex h-9 w-9 items-center justify-center rounded-full border border-slate-300 text-slate-300 hover:border-primary hover:bg-primary hover:text-white">
@@ -545,18 +490,18 @@ include 'header.php';
       <!-- end card -->
     </div>
 
-    <section id="lokasi" class="pt-36 pb-32 bg-slate-100 dark:bg-slate-800">
-      <div class="container mx-auto text-center">
-        <h2 class="mb-4 text-3xl font-bold text-dark dark:text-white sm:text-4xl lg:text-5xl">
-          <span class="mb-4 text-3xl font-bold sm:text-4xl lg:text-5xl text-primary">Lokasi</span> Kami
+    <section id="lokasi" class="pt-36 pb-32 bg-slate-100 dark:bg-slate-800 reveal">
+      <div class="container mx-auto text-center reveal">
+        <h2 class="mb-4 text-3xl font-bold text-dark dark:text-white sm:text-4xl lg:text-5xl reveal">
+          <span class="mb-4 text-3xl font-bold sm:text-4xl lg:text-5xl text-primary reveal">Lokasi</span> Kami
         </h2>
-        <p class="text-md font-medium text-secondary md:text-lg">
+        <p class="text-md font-medium text-secondary md:text-lg reveal">
           Al Muflihin adalah Pondok Pesantren Modern dengan manhaj Darunnajah dan Gontor yang menyelenggarakan
           pendidikan untuk mengembangkan seluruh potensi para santri secara menyeluruh meliputi pembinaan
           skill,
           kecerdasan intelektual, kematangan emosi, dan sikap yang taat kepada Allah SWT.
         </p>
-        <div class="flex justify-center flex-wrap gap-4 mt-10">
+        <div class="flex justify-center flex-wrap gap-4 mt-10 reveal">
           <iframe
             src=https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3961.5498457306826!2d108.74044787367052!3d-6.8244712931733265!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e6f0751d17aefcd%3A0x1c32cd5446d53dd9!2sPondok%20Pesantren%20Al%20Muflihin!5e0!3m2!1sid!2sid!4v1733900401006!5m2!1sid!2sid"
             width="1000" height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false"
@@ -566,8 +511,6 @@ include 'header.php';
     </section>
   </div>
   </div>
-</section>
-</div>
 </section>
 
 <!-- Contact Section End -->
@@ -589,3 +532,4 @@ include 'footer.php';
 
 
 <script src="dist/js/script.js"></script>
+<script src="dist/js/main.js"></script>

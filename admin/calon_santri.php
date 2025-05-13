@@ -126,10 +126,10 @@ $result = $conn->query($sql);
                                         </td>
                                         <td class="px-6 py-6 text-sm text-gray-900">
                                             <p>Pekerjaan Ayah:
-                                                <?php echo $row["pekerjaan_ayah"]?>
+                                                <?php echo $row["pekerjaan_ayah"] ?>
                                             </p>
                                             <p>Pekerjaan Ibu:
-                                                <?php echo $row["pekerjaan_ibu"]?>
+                                                <?php echo $row["pekerjaan_ibu"] ?>
                                             </p>
                                         </td>
                                         <td class="px-6 py-4 text-sm text-gray-900"><?php echo $row["no_hp_ortu"]; ?></td>

@@ -1,39 +1,48 @@
 <?php
 session_start();
 
-// Pastikan pengguna sudah login
+// Cek login
 if (!isset($_SESSION['user_id'])) {
     header("Location: login.php");
     exit();
 }
 
-    $user_id = $_SESSION['user_id'];
-// Cek apakah pengguna adalah admin atau user
-if ($_SESSION['role'] == 'user') {
-    $dashboard_title = "User Dashboard";
-    $welcome_message = "Selamat datang, " . $_SESSION['username'] . "!";
-} else {
-    $dashboard_title = "User Dashboard";
-    $welcome_message = "Selamat datang, " . $_SESSION['username'] . "!";
-}
-
-if (!isset($_SESSION['username']) || !isset($_SESSION['role'])) {
-    header("Location: login.php");
-    exit();
-}
-
+// Ambil username yang sedang login
 $username = $_SESSION['username'];
-$role = $_SESSION['role'];
+
+// Koneksi database
+$servername = "localhost";
+$dbusername = "root";
+$dbpassword = "";
+$dbname = "ppdb_pondok";
+
+$conn = new mysqli($servername, $dbusername, $dbpassword, $dbname);
+
+if ($conn->connect_error) {
+    die("Koneksi gagal: " . $conn->connect_error);
+}
+
+// Ambil data status pendaftaran berdasarkan username
+// Ambil data status pendaftaran berdasarkan username
+$sql = "SELECT * FROM calon_santri WHERE username = '$username'";
+$result = $conn->query($sql);
+
+// Cek data ketemu atau tidak
+if ($result->num_rows > 0) {
+    $santri = $result->fetch_assoc();
+} else {
+    echo "Data tidak ditemukan";  // Debugging
+    $santri = null;
+}
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <title>Status Pendaftaran Santri</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
         .sidebar-collapsed .nav-text {
             display: none;
@@ -41,9 +50,14 @@ $role = $_SESSION['role'];
     </style>
 </head>
 
-<body class="bg-gray-100">
+<body class="bg-gray-100 min-h-screen flex flex-col">
 
-    <div class="flex h-screen">
+    <div class="flex flex-1">
+        <!-- Sidebar -->
+        <?php
+        $role = 'user';
+        ?>
+
         <div id="sidebar" class="bg-gray-800 text-white w-64 space-y-6 py-7 px-2 transition-all duration-300">
             <div class="text-white flex items-center space-x-2 px-4">
                 <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"
@@ -57,7 +71,8 @@ $role = $_SESSION['role'];
                 </span>
             </div>
             <nav>
-                <a href="#" class="flex items-center py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700">
+                <a href="/pendaftaran-santri/user/user_dashboard.php"
+                    class="flex items-center py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                         xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -76,8 +91,7 @@ $role = $_SESSION['role'];
                     </svg>
                     <span class="ml-3 nav-text">Profile Santri</span>
                 </a>
-                <a href="status_pendaftaran.php"
-                    class="flex items-center py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700">
+                <a href="status_pendaftaran.php" class="flex items-center py-2.5 px-4 rounded bg-gray-700">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                         xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
@@ -121,48 +135,52 @@ $role = $_SESSION['role'];
                 </div>
             </header>
 
-            <!-- tampilan data calon santri start -->
-            <?php
-            // Koneksi ke database
-            $servername = "localhost";
-            $username = "root";
-            $password = "";
-            $dbname = "ppdb_pondok";
+            <main class="flex-1 p-6">
+                <h1 class="text-3xl font-bold text-gray-800 mb-6">Status Pendaftaran</h1>
 
-            $conn = new mysqli($servername, $username, $password, $dbname);
+                <?php if ($santri): ?>
+                    <h2 class="text-xl font-semibold text-gray-800 mb-4">Data Status Pendaftaran</h2>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="font-semibold text-gray-700">Nama Lengkap:</label>
+                            <p class="text-gray-900"><?php echo htmlspecialchars($santri['nama_lengkap']); ?></p>
+                        </div>
+                        <div>
+                            <label class="font-semibold text-gray-700">Status Pendaftaran:</label>
+                            <p class="text-gray-900">
+                                <?php
+                                if ($santri['status_pendaftaran']) {
+                                    echo htmlspecialchars($santri['status_pendaftaran']);
+                                } else {
+                                    echo "Belum Diverifikasi";
+                                }
+                                ?>
+                            </p>
+                        </div>
+                        <div>
+                            <label class="font-semibold text-gray-700">Keterangan:</label>
+                            <p class="text-gray-900">
+                                <?php
+                                if ($santri['keterangan']) {
+                                    echo htmlspecialchars($santri['keterangan']);
+                                } else {
+                                    echo "Belum Ada Keterangan";
+                                }
+                                ?>
+                            </p>
+                        </div>
+                    </div>
+                <?php else: ?>
+                    <div class="bg-white p-6 rounded-lg shadow text-center">
+                        <p class="text-gray-600">Data status pendaftaran belum tersedia. Silakan hubungi Admin.</p>
+                    </div>
+                <?php endif; ?>
 
-            if ($conn->connect_error) {
-                die("Koneksi gagal: " . $conn->connect_error);
-            }
-
-            $sql = "SELECT * FROM calon_santri";
-            $result = $conn->query($sql);
-            ?>
-
-            <div class="flex-1 p-6">
-                <h1 class="text-3xl font-bold text-gray-900 mb-4"><?php echo $welcome_message; ?></h1>
-                <p class="text-md text-gray-600">Anda telah login sebagai <?php echo $role; ?>.</p>
-                <p class="text-md text-gray-600 text-justify">Selamat datang di PPDB Pondok Pesantren. Dalam era
-                    informasi dan
-                    komunikasi yang semakin maju saat ini maka kami melakukan sebuah langkah maju dalam rangka
-                    memberikan pelayanan yang lebih baik dan lebih mudah kepada seluruh masyarakat dengan membuka
-                    pendaftaran secara Online. Dengan cara ini orang tua / wali calon siswa dapat dengan mudah
-                    mendaftarkan anak-anaknya ke sekolah, tanpa harus datang secara langsung melainkan dengan cara
-                    mengisi data pendaftaran dari rumah dengan menggunakan fasilitas internet, baik itu menggunakan
-                    komputer maupun gadget.</p>
-            </div>
-            <footer class="text-dark p-4 text-center fixed bottom-0">
-                &copy; 2025 Pondok Pesantren Al-Muflihin | Gebang Ilir, Gebang, CIrebon Jawa Barat.
-            </footer>
-
-            <?php
-            $conn->close();
-            ?>
-            <!-- tampilan data calon santri end -->
-
+            </main>
 
         </div>
     </div>
+
     <script>
         function toggleSidebar() {
             const sidebar = document.getElementById('sidebar');
@@ -171,6 +189,7 @@ $role = $_SESSION['role'];
             sidebar.classList.toggle('sidebar-collapsed');
         }
     </script>
+
 </body>
 
 </html>

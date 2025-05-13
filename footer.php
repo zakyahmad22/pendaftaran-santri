@@ -22,7 +22,7 @@
 
     <!-- Footer Start -->
     <footer class="bg-dark pt-24 pb-12">
-        <div class="container">
+        <div class="container reveal">
             <div class="flex flex-wrap">
                 <div class="mb-12 w-full px-4 font-medium text-slate-300 md:w-1/3">
                     <h2 class="mb-5 text-4xl font-bold text-white">Al-Muflihin</h2>
@@ -41,11 +41,11 @@
                             <a href="tentang.php" class="mb-3 inline-block text-base hover:text-primary">Tentang</a>
                         </li>
                         <li>
-                            <a href="pendaftaran.php"
+                            <a href="form_pendaftaran.php"
                                 class="mb-3 inline-block text-base hover:text-primary">Pendaftaran</a>
                         </li>
                         <li>
-                            <a href="informasi.php" class="mb-3 inline-block text-base hover:text-primary">Informasi</a>
+                            <a href="admin/informasi.php" class="mb-3 inline-block text-base hover:text-primary">Informasi</a>
                         </li>
                     </ul>
                 </div>

@@ -39,9 +39,30 @@ include '../config.php';
                 </div>
             </div>
         </div>
+
         <!-- End Page Title -->
+
+        <style>
+            @keyframes fadeInUp {
+                0% {
+                    opacity: 0;
+                    transform: translateY(20px);
+                }
+
+                100% {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+
+            .fade-in-up {
+                animation: fadeInUp 0.6s ease-out forwards;
+                opacity: 0;
+            }
+        </style>
+
         <div class="container">
-            <div class="w-full px-4">
+            <div class="w-full px-4 fade-in-up animate">
                 <div class="mx-auto mt-5 mb-16 max-w-xl text-center">
                     <!-- <h4 class="mb-2 text-lg font-semibold text-primary">Blog</h4> -->
                     <h2 class="mb-4 text-3xl font-bold text-dark dark:text-white sm:text-4xl lg:text-5xl">Informasi
@@ -58,19 +79,19 @@ include '../config.php';
             ?>
 
             <!-- Tambahkan div ini untuk AJAX -->
-            <div class="flex flex-wrap" id="informasi-container">
+            <div class="fade-in-up animate flex flex-wrap" id="informasi-container">
                 <?php
                 $result = mysqli_query($mysqli, "SELECT * FROM informasi ORDER BY id_info DESC");
                 while ($row = mysqli_fetch_assoc($result)) {
                     echo "<div class='w-full px-4 lg:w-1/2 xl:w-1/3'>
-                    <div class='mb-10 overflow-hidden rounded-xl bg-white shadow-lg dark:bg-slate-800'>
-                        <img src='../uploads/{$row['gambar']}' alt='Informasi' class='w-full h-60 object-cover' />
-                        <div class='py-8 px-6'>
-                            <h3 class='mb-3 block truncate text-xl font-semibold text-dark dark:text-white'>{$row['judul']}</h3>
-                            <p class='mb-6 text-base font-medium text-secondary'>" . substr($row['deskripsi'], 0, 100) . "...</p>
-                            <a href='{$row['link']}' class='rounded-lg bg-primary py-2 px-4 text-sm font-medium text-white hover:opacity-80'>Baca Selengkapnya</a>
-                        </div>
+                <div class='fade-in-up animate mb-10 overflow-hidden rounded-xl bg-white shadow-lg dark:bg-slate-800'>
+                    <img src='../uploads/{$row['gambar']}' alt='Informasi' class='w-full h-60 object-cover' />
+                    <div class='py-8 px-6'>
+                        <h3 class='mb-3 block truncate text-xl font-semibold text-dark dark:text-white'>{$row['judul']}</h3>
+                        <p class='mb-6 text-base font-medium text-secondary'>" . substr($row['deskripsi'], 0, 100) . "...</p>
+                        <a href='{$row['link']}' class='rounded-lg bg-primary py-2 px-4 text-sm font-medium text-white hover:opacity-80'>Baca Selengkapnya</a>
                     </div>
+                </div>
                 </div>";
                 }
                 ?>
@@ -129,6 +150,34 @@ include '../config.php';
             setInterval(loadInformasi, 3000); // Refresh otomatis setiap 3 detik
         });
 
+
+    </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const cards = document.querySelectorAll(".fade-in-up");
+
+            const options = {
+                threshold: 0.1,
+            };
+
+            const observer = new IntersectionObserver(function (entries, observer) {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("animate");
+                        observer.unobserve(entry.target); // biar cuma sekali animasi
+                    }
+                });
+            }, options);
+
+            cards.forEach((card) => {
+                observer.observe(card);
+            });
+        });
+        cards.forEach((card, i) => {
+            card.style.animationDelay = `${i * 0.2}s`;
+            observer.observe(card);
+        });
 
     </script>
 

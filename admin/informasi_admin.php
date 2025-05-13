@@ -12,6 +12,8 @@ include '../sidebar.php';
     <title>Pendaftaran Santri Baru</title>
     <link href="../dist/css/final.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="icon" type="image/png" href="../dist/img/logo.png?v=1">
+    <link rel="shortcut icon" type="image/png" href="../dist/img/logo.png?v=1">
 
     <!-- <script>
         if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
@@ -79,8 +81,10 @@ include '../sidebar.php';
                 </table>
             </div>
         </div>
+        <footer class="text-dark p-4 text-center bottom-0">
+            &copy; 2025 Pondok Pesantren Al-Muflihin | Gebang Ilir, Gebang, Cirebon Jawa Barat.
+        </footer>
 
-        <!-- </div> -->
     </section>
 
 </body>
