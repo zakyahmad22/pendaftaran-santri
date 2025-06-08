@@ -23,15 +23,12 @@ if ($conn->connect_error) {
 }
 
 // Ambil data status pendaftaran berdasarkan username
-// Ambil data status pendaftaran berdasarkan username
 $sql = "SELECT * FROM calon_santri WHERE username = '$username'";
 $result = $conn->query($sql);
 
-// Cek data ketemu atau tidak
 if ($result->num_rows > 0) {
     $santri = $result->fetch_assoc();
 } else {
-    echo "Data tidak ditemukan";  // Debugging
     $santri = null;
 }
 ?>
@@ -54,10 +51,7 @@ if ($result->num_rows > 0) {
 
     <div class="flex flex-1">
         <!-- Sidebar -->
-        <?php
-        $role = 'user';
-        ?>
-
+        <?php $role = 'user'; ?>
         <div id="sidebar" class="bg-gray-800 text-white w-64 space-y-6 py-7 px-2 transition-all duration-300">
             <div class="text-white flex items-center space-x-2 px-4">
                 <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"
@@ -66,9 +60,7 @@ if ($result->num_rows > 0) {
                         d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z">
                     </path>
                 </svg>
-                <span class="text-2xl font-bold nav-text">
-                    <?php echo ucfirst($role); ?>
-                </span>
+                <span class="text-2xl font-bold nav-text"><?php echo ucfirst($role); ?></span>
             </div>
             <nav>
                 <a href="/pendaftaran-santri/user/user_dashboard.php"
@@ -121,9 +113,7 @@ if ($result->num_rows > 0) {
                 </button>
                 <h1 class="text-2xl font-bold text-gray-900">Dashboard</h1>
                 <div class="flex items-center space-x-3">
-                    <span class="text-gray-700 font-medium">
-                        <?php echo ucfirst($role) . ' : ' . $username; ?>
-                    </span>
+                    <span class="text-gray-700 font-medium"><?php echo ucfirst($role) . ' : ' . $username; ?></span>
                     <div class="w-10 h-10 bg-gray-300 rounded-full flex items-center justify-center">
                         <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                             xmlns="http://www.w3.org/2000/svg">
@@ -139,35 +129,47 @@ if ($result->num_rows > 0) {
                 <h1 class="text-3xl font-bold text-gray-800 mb-6">Status Pendaftaran</h1>
 
                 <?php if ($santri): ?>
-                    <h2 class="text-xl font-semibold text-gray-800 mb-4">Data Status Pendaftaran</h2>
-                    <div class="space-y-4">
-                        <div>
-                            <label class="font-semibold text-gray-700">Nama Lengkap:</label>
-                            <p class="text-gray-900"><?php echo htmlspecialchars($santri['nama_lengkap']); ?></p>
+                    <div class="bg-white rounded-lg shadow p-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="space-y-4">
+                                <div>
+                                    <label class="font-semibold text-gray-700">Nama Lengkap:</label>
+                                    <p class="text-gray-900"><?php echo htmlspecialchars($santri['nama_lengkap']); ?></p>
+                                </div>
+                                <div>
+                                    <label class="font-semibold text-gray-700">Tanggal Pendaftaran:</label>
+                                    <p class="text-gray-900"><?php echo htmlspecialchars($santri['tanggal_pendaftaran']); ?>
+                                    </p>
+                                </div>
+                                <div>
+                                    <label class="font-semibold text-gray-700">Alamat Lengkap:</label>
+                                    <p class="text-gray-900"><?php echo htmlspecialchars($santri['alamat_lengkap']); ?></p>
+                                </div>
+                                <div>
+                                    <label class="font-semibold text-gray-700">Status Pendaftaran:</label>
+                                    <p class="text-gray-900">
+                                        <?php
+                                        echo $santri['status_pendaftaran'] ? htmlspecialchars($santri['status_pendaftaran']) : "Belum Diverifikasi";
+                                        ?>
+                                    </p>
+                                </div>
+                                <div>
+                                    <label class="font-semibold text-gray-700">Keterangan:</label>
+                                    <p class="text-gray-900">
+                                        <?php
+                                        echo $santri['keterangan'] ? htmlspecialchars($santri['keterangan']) : "Belum Ada Keterangan";
+                                        ?>
+                                    </p>
+                                </div>
+                            </div>
                         </div>
-                        <div>
-                            <label class="font-semibold text-gray-700">Status Pendaftaran:</label>
-                            <p class="text-gray-900">
-                                <?php
-                                if ($santri['status_pendaftaran']) {
-                                    echo htmlspecialchars($santri['status_pendaftaran']);
-                                } else {
-                                    echo "Belum Diverifikasi";
-                                }
-                                ?>
-                            </p>
-                        </div>
-                        <div>
-                            <label class="font-semibold text-gray-700">Keterangan:</label>
-                            <p class="text-gray-900">
-                                <?php
-                                if ($santri['keterangan']) {
-                                    echo htmlspecialchars($santri['keterangan']);
-                                } else {
-                                    echo "Belum Ada Keterangan";
-                                }
-                                ?>
-                            </p>
+
+                        <!-- Tombol Cetak -->
+                        <div class="mt-6">
+                            <a href="cetak_status.php" target="_blank"
+                                class="bg-blue-600 text-white px-5 py-2 rounded hover:bg-blue-700 transition">
+                                Cetak PDF
+                            </a>
                         </div>
                     </div>
                 <?php else: ?>
@@ -175,9 +177,7 @@ if ($result->num_rows > 0) {
                         <p class="text-gray-600">Data status pendaftaran belum tersedia. Silakan hubungi Admin.</p>
                     </div>
                 <?php endif; ?>
-
             </main>
-
         </div>
     </div>
 

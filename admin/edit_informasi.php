@@ -31,15 +31,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Jika gambar baru diupload
     if ($_FILES['gambar']['error'] == UPLOAD_ERR_OK) {
         $gambar = $_FILES['gambar']['name'];
-        // $target_dir = "uploads/";
         $target_dir = "../uploads/";
         $target_file = $target_dir . basename($gambar);
 
         if (move_uploaded_file($_FILES["gambar"]["tmp_name"], $target_file)) {
-            // Update data ke database dengan gambar baru
             $query = "UPDATE informasi SET judul = '$judul', deskripsi = '$deskripsi', gambar = '$gambar', link = '$link' WHERE id_info = '$id_info'";
             if (mysqli_query($mysqli, $query)) {
-                header("Location: informasi_admin.php?status=sukses");
+                header("Location: edit_informasi.php?status=sukses&id_info=$id_info");
                 exit();
             } else {
                 echo "Gagal memperbarui data: " . mysqli_error($mysqli);
@@ -48,10 +46,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             echo "Gagal mengunggah gambar.";
         }
     } else {
-        // Update data tanpa mengganti gambar
         $query = "UPDATE informasi SET judul = '$judul', deskripsi = '$deskripsi', link = '$link' WHERE id_info = '$id_info'";
         if (mysqli_query($mysqli, $query)) {
-            header("Location: edit_informasi.php?status=sukses");
+            header("Location: edit_informasi.php?status=sukses&id_info=$id_info");
             exit();
         } else {
             echo "Gagal memperbarui data: " . mysqli_error($mysqli);
@@ -74,7 +71,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <body>
     <section id="edit_informasi" class="bg-slate-100 w-full dark:bg-dark">
-        <!-- <div class="container mx-auto px-4 max-w-3xl"> -->
         <div class="flex-1">
             <header class="bg-white shadow p-4 flex justify-between items-center">
                 <button onclick="toggleSidebar()" class="text-gray-500 focus:outline-none">
@@ -87,13 +83,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </button>
                 <h2 class="text-2xl font-bold text-gray-700">Edit Informasi</h2>
                 <h3 class="text-md font-medium text-secondary md:text-lg"></h3>
-                <!-- <h3 class="text-md font-medium text-secondary md:text-lg"></h3> -->
             </header>
-            <!-- <div class="bg-gray-100 dark:bg-dark py-6 px-6 rounded-lg shadow-lg">
-                <h2 class="text-3xl font-bold text-dark dark:text-white">Edit Informasi</h2>
-                <p class="text-md font-medium text-secondary md:text-lg">Silakan ubah informasi yang ingin diperbarui.
-                </p>
-            </div> -->
 
             <div class="mt-8 bg-white p-6 rounded-lg shadow-lg dark:bg-slate-800">
                 <form action="edit_informasi.php?id_info=<?php echo $id_info; ?>" method="POST"
@@ -118,22 +108,58 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             class="w-full px-3 py-2 border rounded-lg dark:bg-gray-700 dark:text-white" rows="4"
                             required><?php echo $row['deskripsi']; ?></textarea>
                     </div>
-                    <div class="mb-4">
-                        <label class="block text-dark dark:text-white font-medium mb-2">Link</label>
-                        <input type="text" name="link"
-                            class="w-full px-3 py-2 border rounded-lg dark:bg-gray-700 dark:text-white"
-                            value="<?php echo $row['link']; ?>">
-                    </div>
                     <div class="flex justify-end space-x-2">
                         <button type="submit"
                             class="bg-primary text-white px-4 py-2 rounded-lg hover:opacity-80">Perbarui</button>
                         <a href="informasi_admin.php"
-                            class="bg-primary text-white px-4 py-2 rounded-lg hover:opacity-80">Batal</a>
+                            class="bg-red-500 text-white px-4 py-2 rounded-lg hover:opacity-80">Batal</a>
                     </div>
                 </form>
             </div>
         </div>
     </section>
+
+    <!-- Modal Sukses dengan Animasi -->
+    <div id="successModal"
+        class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 transition-opacity duration-300 opacity-0 pointer-events-none z-50">
+        <div id="modalContent"
+            class="bg-white p-6 rounded-lg shadow-lg text-center w-96 transform scale-95 transition-all duration-300 opacity-0">
+            <h2 class="text-xl font-bold text-green-600 mb-2">Berhasil!</h2>
+            <p class="text-gray-700 mb-4">Informasi berhasil diperbarui.</p>
+            <button onclick="closeModal()"
+                class="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700">Tutup</button>
+        </div>
+    </div>
+
+    <script>
+        function closeModal() {
+            const modal = document.getElementById('successModal');
+            const content = document.getElementById('modalContent');
+
+            content.classList.remove('opacity-100', 'scale-100');
+            content.classList.add('opacity-0', 'scale-95');
+            modal.classList.remove('opacity-100');
+            modal.classList.add('opacity-0');
+
+            setTimeout(() => {
+                modal.classList.add('pointer-events-none');
+                window.history.replaceState(null, null, window.location.pathname + "?id_info=<?php echo $id_info; ?>");
+            }, 300); // Waktu sama dengan durasi animasi
+        }
+
+        <?php if (isset($_GET['status']) && $_GET['status'] === 'sukses'): ?>
+            window.addEventListener('DOMContentLoaded', () => {
+                const modal = document.getElementById('successModal');
+                const content = document.getElementById('modalContent');
+
+                modal.classList.remove('opacity-0', 'pointer-events-none');
+                modal.classList.add('opacity-100');
+                content.classList.remove('opacity-0', 'scale-95');
+                content.classList.add('opacity-100', 'scale-100');
+            });
+        <?php endif; ?>
+    </script>
+
 </body>
 
 </html>

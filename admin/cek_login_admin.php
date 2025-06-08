@@ -38,6 +38,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 
 // Redirect kembali ke halaman login jika gagal
-header("Location: login.php");
+header("Location: login_admin.php");
 exit();
 ?>

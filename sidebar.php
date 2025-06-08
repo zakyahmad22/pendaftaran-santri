@@ -71,6 +71,102 @@ $role = $_SESSION['role'];
                     <span class="ml-3 nav-text">Dashboard</span>
                 </a>
 
+                <!-- Kelola Halaman (Hero Section) start -->
+                <a href="/pendaftaran-santri/admin/kelola_hero_section.php"
+                    class="flex items-center py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700">
+                    <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                        stroke-width="1.5" stroke="currentColor" class="size-6">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
+                    </svg>
+                    <span class="ml-3 nav-text">Kelola Halaman</span>
+                </a>
+                <!-- kelola halaman hero section end -->
+
+                <!-- Kelola Tentang Kami start -->
+                <a href="/pendaftaran-santri/admin/kelola_tentang_kami.php"
+                    class="flex items-center py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700">
+                    <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                        stroke-width="1.5" stroke="currentColor" class="size-6">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m5.231 13.481L15 17.25m-4.5-15H5.625c-.621 0-1.125.504-1.125 1.125v16.5c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Zm3.75 11.625a2.625 2.625 0 1 1-5.25 0 2.625 2.625 0 0 1 5.25 0Z" />
+                    </svg>
+                    <span class="ml-3 nav-text">Kelola Tentang</span>
+                </a>
+                <!-- Kelola Tentang Kami end -->
+
+                <!-- Kelola Falsafah Pondok start -->
+                <a href="kelola_falsafah.php"
+                    class="flex items-center py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700">
+                    <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                        stroke-width="1.5" stroke="currentColor" class="size-6">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m5.231 13.481L15 17.25m-4.5-15H5.625c-.621 0-1.125.504-1.125 1.125v16.5c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Zm3.75 11.625a2.625 2.625 0 1 1-5.25 0 2.625 2.625 0 0 1 5.25 0Z" />
+                    </svg>
+                    <span class="ml-3 nav-text">Kelola Falsafah Pondok</span>
+                </a>
+                <!-- kelola falsafah pondok end -->
+
+                <!-- Kelola Pendaftaran Section start -->
+                <a href="kelola_pendaftaran_section.php"
+                    class="flex items-center py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700">
+                    <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                        stroke-width="1.5" stroke="currentColor" class="size-6">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m5.231 13.481L15 17.25m-4.5-15H5.625c-.621 0-1.125.504-1.125 1.125v16.5c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Zm3.75 11.625a2.625 2.625 0 1 1-5.25 0 2.625 2.625 0 0 1 5.25 0Z" />
+                    </svg>
+                    <span class="ml-3 nav-text">Kelola Pendaftaran</span>
+                </a>
+                <!-- kelola pendaftaran section end -->
+
+                <!-- Kelola Alumni Section -->
+                <a href="kelola_alumni.php"
+                    class="flex items-center py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700">
+                    <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                        stroke-width="1.5" stroke="currentColor" class="size-6">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m5.231 13.481L15 17.25m-4.5-15H5.625c-.621 0-1.125.504-1.125 1.125v16.5c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Zm3.75 11.625a2.625 2.625 0 1 1-5.25 0 2.625 2.625 0 0 1 5.25 0Z" />
+                    </svg>
+                    <span class="ml-3 nav-text">Kelola Alumni</span>
+                </a>
+                <!-- kelola alumni section end -->
+
+                <!-- Kelola Kontak Section -->
+                <a href="kelola_kontak.php"
+                    class="flex items-center py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700">
+                    <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                        stroke-width="1.5" stroke="currentColor" class="size-6">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m5.231 13.481L15 17.25m-4.5-15H5.625c-.621 0-1.125.504-1.125 1.125v16.5c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Zm3.75 11.625a2.625 2.625 0 1 1-5.25 0 2.625 2.625 0 0 1 5.25 0Z" />
+                    </svg>
+                    <span class="ml-3 nav-text">Kelola Kontak</span>
+                </a>
+                <!-- kelola kontak section end -->
+
+                <!-- Kelola Lokasi Section -->
+                <a href="kelola_lokasi_section.php"
+                    class="flex items-center py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700">
+                    <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                        stroke-width="1.5" stroke="currentColor" class="size-6">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m5.231 13.481L15 17.25m-4.5-15H5.625c-.621 0-1.125.504-1.125 1.125v16.5c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Zm3.75 11.625a2.625 2.625 0 1 1-5.25 0 2.625 2.625 0 0 1 5.25 0Z" />
+                    </svg>
+                    <span class="ml-3 nav-text">Kelola Lokasi</span>
+                </a>
+                <!-- kelola lokasi section end -->
+
+                <!-- Kelola Tentang Pondok start -->
+                <a href="kelola_tentang_pondok.php"
+                    class="flex items-center py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700">
+                    <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                        stroke-width="1.5" stroke="currentColor" class="size-6">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m5.231 13.481L15 17.25m-4.5-15H5.625c-.621 0-1.125.504-1.125 1.125v16.5c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Zm3.75 11.625a2.625 2.625 0 1 1-5.25 0 2.625 2.625 0 0 1 5.25 0Z" />
+                    </svg>
+                    <span class="ml-3 nav-text">Kelola Tentang Pondok</span>
+                </a>
+                <!-- kelola tentang pondok end -->
+
                 <!-- dashboard admin start -->
                 <?php if ($role === 'admin'): ?>
                     <a href="/pendaftaran-santri/admin/calon_santri.php"
@@ -102,7 +198,8 @@ $role = $_SESSION['role'];
                         <span class="ml-3 nav-text">Data Pengguna</span>
                     </a>
 
-                    <a href="/pendaftaran-santri/admin/admin_status_update.php" class="flex items-center py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700">
+                    <a href="/pendaftaran-santri/admin/admin_status_update.php"
+                        class="flex items-center py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700">
                         <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                             stroke-width="1.5" stroke="currentColor" class="size-6">
                             <path stroke-linecap="round" stroke-linejoin="round"
@@ -112,7 +209,7 @@ $role = $_SESSION['role'];
                         <span class="ml-3 nav-text">Status Pendaftaran</span>
                     </a>
                 <?php endif; ?>
-                <a href="../logout.php"
+                <a href="/pendaftaran-santri/admin/logout_admin.php"
                     class="flex items-center py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
                         stroke="currentColor" class="w-5 h-5">

@@ -22,7 +22,7 @@ include 'header.php';
                 opacity: 0;
                 transform: translateY(50px);
                 transition: all 0.8s ease;
-            }
+            } 
 
             .reveal-bottom.active {
                 opacity: 1;
@@ -59,6 +59,13 @@ include 'header.php';
                 <div class="mb-8 w-full px-4">
                     <label for="nama_lengkap" class="text-base font-bold text-primary">Nama Lengkap</label>
                     <input type="text" id="nama_lengkap" name="nama_lengkap" required
+                        class="w-full rounded-md bg-white p-3 text-gray-800 focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary border border-gray-300" />
+                </div>
+
+                <!-- Username -->
+                <div class="mb-8 w-full px-4">
+                    <label for="username" class="text-base font-bold text-primary">Username</label>
+                    <input type="text" id="username" name="username" required
                         class="w-full rounded-md bg-white p-3 text-gray-800 focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary border border-gray-300" />
                 </div>
 

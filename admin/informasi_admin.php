@@ -1,6 +1,8 @@
 <?php
 include '../config.php';
 include '../sidebar.php';
+
+$showSuccess = isset($_GET['status']) && $_GET['status'] === 'hapus_sukses';
 ?>
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
@@ -14,14 +16,6 @@ include '../sidebar.php';
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="icon" type="image/png" href="../dist/img/logo.png?v=1">
     <link rel="shortcut icon" type="image/png" href="../dist/img/logo.png?v=1">
-
-    <!-- <script>
-        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-            document.documentElement.classList.add('dark');
-        } else {
-            document.documentElement.classList.remove('dark');
-        }
-    </script> -->
 </head>
 
 <body>
@@ -47,9 +41,7 @@ include '../sidebar.php';
 
             <div class="overflow-x-auto">
                 <h3 class="pb-3 text-xl font-medium md:text-lg text-dark dark:text-white">Halaman ini digunakan untuk
-                    mengelola
-                    informasi
-                    yang ditampilkan pada website.</h3>
+                    mengelola informasi yang ditampilkan pada website.</h3>
                 <table class="w-full border-collapse border border-gray-200 dark:border-gray-700">
                     <thead>
                         <tr class="bg-gray-100 dark:bg-gray-700 text-left">
@@ -68,14 +60,13 @@ include '../sidebar.php';
                                 <img src='../uploads/{$row['gambar']}' alt='Informasi' class='h-16 w-24 object-cover rounded'>
                             </td>
                             <td class='p-3 border border-gray-300 dark:border-gray-600'>{$row['judul']}</td>
-                            <td class='p-3 border border-gray-300 dark:border-gray-600 truncate'>{$row['deskripsi']}</td>
+                            <td class='p-3 border border-gray-300 dark:border-gray-600 max-w-xs truncate'>{$row['deskripsi']}</td>
                             <td class='p-3 border border-gray-300 dark:border-gray-600 flex space-x-2'>
                                 <a href='edit_informasi.php?id_info={$row['id_info']}' class='bg-primary text-white px-3 py-1 rounded-lg hover:opacity-80'>Edit</a>
-                                <a href='hapus_informasi.php?id_info={$row['id_info']}' class='bg-red-500 text-white px-3 py-1 rounded-lg hover:opacity-80' onclick='return confirm(\"Yakin ingin menghapus?\")'>Hapus</a>
+                                <button onclick='confirmDelete({$row['id_info']})' class='bg-red-500 text-white px-3 py-1 rounded-lg hover:opacity-80'>Hapus</button>
                             </td>
                         </tr>";
                         }
-
                         ?>
                     </tbody>
                 </table>
@@ -84,7 +75,68 @@ include '../sidebar.php';
         <footer class="text-dark p-4 text-center bottom-0">
             &copy; 2025 Pondok Pesantren Al-Muflihin | Gebang Ilir, Gebang, Cirebon Jawa Barat.
         </footer>
-
     </section>
 
+    <!-- Modal Konfirmasi Hapus -->
+    <div id="deleteModal"
+        class="fixed inset-0 z-50 hidden items-center justify-center bg-black bg-opacity-50 transition-opacity">
+        <div class="bg-white rounded-lg shadow-lg p-6 w-full max-w-md text-center">
+            <h2 class="text-xl font-semibold text-dark mb-4">Konfirmasi Hapus</h2>
+            <p class="text-gray-600 mb-6">Apakah Anda yakin ingin menghapus informasi ini?</p>
+            <div class="flex justify-center space-x-4">
+                <button onclick="closeModal()"
+                    class="bg-gray-300 text-gray-700 px-4 py-2 rounded hover:bg-gray-400">Batal</button>
+                <a id="confirmDeleteBtn" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">Hapus</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Berhasil Hapus -->
+    <div id="successModal"
+        class="fixed inset-0 z-50 hidden items-center justify-center bg-black bg-opacity-50 transition-opacity">
+        <div class="bg-white rounded-lg shadow-lg p-6 w-full max-w-md text-center">
+            <h2 class="text-xl font-semibold text-dark mb-4">Berhasil</h2>
+            <p>Informasi berhasil dihapus.</p>
+            <button onclick="closeSuccessModal()"
+                class="mt-4 bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">Tutup</button>
+        </div>
+    </div>
+
+    <script>
+        function confirmDelete(id) {
+            const modal = document.getElementById('deleteModal');
+            const confirmBtn = document.getElementById('confirmDeleteBtn');
+            confirmBtn.href = 'hapus_informasi.php?id_info=' + id;
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('deleteModal');
+            modal.classList.remove('flex');
+            modal.classList.add('hidden');
+        }
+
+        function closeSuccessModal() {
+            const modal = document.getElementById('successModal');
+            modal.classList.remove('flex');
+            modal.classList.add('hidden');
+
+            // Hapus parameter success dari URL agar modal tidak muncul lagi saat reload
+            const url = new URL(window.location);
+            url.searchParams.delete('success');
+            window.history.replaceState({}, document.title, url.toString());
+        }
+
+        window.onload = function () {
+            <?php if ($showSuccess): ?>
+                const successModal = document.getElementById('successModal');
+                successModal.classList.remove('hidden');
+                successModal.classList.add('flex');
+            <?php endif; ?>
+        };
+    </script>
+
 </body>
+
+</html>

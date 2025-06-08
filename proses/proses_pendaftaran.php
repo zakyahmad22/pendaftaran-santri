@@ -1,21 +1,21 @@
 <?php
 // Koneksi ke database
-$servername = "localhost"; // Ganti dengan nama server database Anda
-$username = "root";        // Ganti dengan username database Anda
-$password = "";            // Ganti dengan password database Anda
-$dbname = "ppdb_pondok";   // Pastikan nama database benar
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "ppdb_pondok";
 
-// Membuat koneksi
 $conn = new mysqli($servername, $username, $password, $dbname);
 
 // Cek koneksi
 if ($conn->connect_error) {
     die("Koneksi gagal: " . $conn->connect_error);
-}
+} 
 
 // Pastikan data dikirim melalui metode POST
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Ambil data dari form
+    $username_input = $_POST['username'];
     $tanggal_pendaftaran = $_POST['tanggal_pendaftaran'];
     $nama_lengkap = $_POST['nama_lengkap'];
     $tempat_lahir = $_POST['tempat_lahir'];
@@ -40,16 +40,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $alamat_rumah = $_POST['alamat_rumah'];
     $no_hp_ortu = $_POST['no_hp_ortu'];
 
-    // Query untuk insert data
-    $sql = "INSERT INTO calon_santri (
-        tanggal_pendaftaran, nama_lengkap, tempat_lahir, tanggal_lahir, alamat_lengkap, 
+    // Cek apakah username sudah dipakai
+    $check_query = "SELECT id FROM calon_santri WHERE username = '$username_input'";
+    $check_result = $conn->query($check_query);
+    if ($check_result->num_rows > 0) {
+        echo "<script>
+                alert('Username sudah digunakan, silakan pilih yang lain.');
+                window.history.back();
+              </script>";
+        exit();
+    }
+
+    // Query insert data lengkap termasuk username
+    $sql_insert = "INSERT INTO calon_santri (
+        username, tanggal_pendaftaran, nama_lengkap, tempat_lahir, tanggal_lahir, alamat_lengkap, 
         tinggal_bersama, jenis_kelamin, sekolah_terakhir, pernah_mondok, nama_pondok_sebelumnya, 
         alamat_pondok_sebelumnya, nama_ayah, nama_ibu, tempat_lahir_ayah, tanggal_lahir_ayah, 
         tempat_lahir_ibu, tanggal_lahir_ibu, pekerjaan_ayah, pekerjaan_ibu, penghasilan_ayah, 
         penghasilan_ibu, alamat_rumah, no_hp_ortu
     ) VALUES (
-        '$tanggal_pendaftaran', '$nama_lengkap', '$tempat_lahir', '$tanggal_lahir', '$alamat_lengkap', 
-        '$tinggal_bersama', '$jenis_kelamin', '$sekolah_terakhir', '$pernah_mondok', 
+        '$username_input', '$tanggal_pendaftaran', '$nama_lengkap', '$tempat_lahir', '$tanggal_lahir', 
+        '$alamat_lengkap', '$tinggal_bersama', '$jenis_kelamin', '$sekolah_terakhir', '$pernah_mondok', 
         " . ($nama_pondok_sebelumnya ? "'$nama_pondok_sebelumnya'" : "NULL") . ", 
         " . ($alamat_pondok_sebelumnya ? "'$alamat_pondok_sebelumnya'" : "NULL") . ", 
         '$nama_ayah', '$nama_ibu', '$tempat_lahir_ayah', '$tanggal_lahir_ayah', 
@@ -57,19 +68,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         '$penghasilan_ayah', '$penghasilan_ibu', '$alamat_rumah', '$no_hp_ortu'
     )";
 
-    // Eksekusi query
-    if ($conn->query($sql) === TRUE) {
+    if ($conn->query($sql_insert) === TRUE) {
         echo "<script>
-                alert('Pendaftaran berhasil!');
+                alert('Pendaftaran berhasil! Silakan login dengan username Anda.');
                 window.location.href = '../form_pendaftaran.php';
                 </script>";
     } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
+        echo "Error: " . $sql_insert . "<br>" . $conn->error;
     }
 } else {
     echo "Data tidak dikirim melalui metode POST.";
 }
 
-// Tutup koneksi
 $conn->close();
 ?>

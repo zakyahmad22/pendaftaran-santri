@@ -1,8 +1,17 @@
 <?php
 include 'header.php';
-?>
+include 'config.php';
 
-<!-- Content Start -->
+$jenis = isset($_GET['jenis']) ? $_GET['jenis'] : '';
+if ($jenis) {
+    $stmt = $mysqli->prepare("SELECT * FROM tb_tentang_kami WHERE jenis = ? LIMIT 1");
+    $stmt->bind_param("s", $jenis);
+    $stmt->execute();
+    $data = $stmt->get_result();
+} else {
+    $data = $mysqli->query("SELECT * FROM tb_tentang_kami ORDER BY id ASC");
+}
+?>
 
 <style>
     .reveal {
@@ -30,7 +39,6 @@ include 'header.php';
     .reveal-left {
         opacity: 0;
         transform: translateX(-60px);
-        /* Geser dari kiri */
         transition: all 0.8s ease;
     }
 
@@ -40,118 +48,69 @@ include 'header.php';
     }
 </style>
 
-
-<section id="about" class="pt-36 dark:bg-dark">
-    <div class="container">
-        <div class="flex flex-wrap">
-            <!-- Page Title -->
-            <div class="bg-gray-100 dark:bg-dark py-16" data-aos="fade">
-                <div class="container mx-auto px-4 max-w-3xl lg:max-w-5xl">
-                    <div class="breadcrumbs text-secondary dark:text-white pb-3">
-                        <ol class="flex space-x-2 text-sm px-4">
-                            <li><a href="index.php" class="hover:text-primary">Beranda |</a></li>
-                            <li class="current text-primary">Tentang</li>
-                        </ol>
-                    </div>
-                </div>
-            </div>
-            <!-- End Page Title -->
-            <div class="container mx-auto flex flex-wrap items-center">
-                <!-- Teks -->
-                <div class="text-justify mb-10 mt-3 w-full px-4 lg:w-1/2 reveal">
-                    <h4 class="mb-3 text-lg font-bold uppercase text-primary">Sejarah Tentang</h4>
-                    <h2 class="mb-5 text-3xl font-bold text-dark dark:text-white lg:text-4xl">
-                        Pondok Pesantren <br> Al-Muflihin
-                    </h2>
-                    <p class="mb-4 text-base font-medium text-secondary lg:text-lg" style="text-align: justify;">
-                        Pondok pesantren Al Muflihin didirikan oleh salah satu ulama lulusan Pondok Pesantren
-                        Darunnajah Jakarta yaitu Alm. Kyai M Rohmat Romdlon dengan dukungan istrinya Hj.Aisyah
-                        dan juga mertuanya H.Syamsuri dan Hj.Suhanah, berdiri pada tahun 2003 dengan luas tanah
-                        Wakaf ±3 Hektar. Pada saat ini Pondok Pesantren Al Muflihin dipimpin oleh Nyai Aisyah, S.
-                        Ag Yang memiliki 100 santri dari berbagai daerah.
-                    </p>
-                    <!-- Tombol Baca Selengkapnya -->
-                    <div class="mt-6">
-                        <a href="sejarah.html"
-                            class="inline-block rounded-lg bg-primary px-6 py-2 text-white font-semibold shadow-md hover:bg-blue-700 transition duration-300">
-                            Baca Selengkapnya
-                        </a>
-                    </div>
-                </div>
-                <!-- Gambar -->
-                <div class="w-full px-4 lg:w-1/2 reveal-right">
-                    <img src="dist/img/informasi2.JPG" alt="Informasi Al-Muflihin"
-                        class="mx-auto max-w-full rounded-lg shadow-lg">
-                </div>
-            </div>
-
-            <div class="container mx-auto flex flex-wrap items-center reveal">
-                <!-- Gambar -->
-                <div class="w-full px-4 lg:w-1/2 reveal-left">
-                    <img src="dist/img/informasi1.JPG" alt="Informasi Al-Muflihin"
-                        class="mx-auto max-w-full rounded-lg shadow-lg">
-                </div>
-                <!-- Teks -->
-                <div class="mt-10 mb-10 w-full px-4 lg:w-1/2">
-                    <h4 class="mb-3 text-lg font-bold uppercase text-primary">Visi & Misi</h4>
-                    <h2 class="mb-5 text-3xl font-bold text-dark dark:text-white lg:text-4xl">
-                        Pondok Pesantren <br> Al-Muflihin
-                    </h2>
-                    <p class="mb-4 text-base font-medium text-secondary lg:text-lg" style="text-align: justify;">
-                        Visi Pondok Pesantren Al Muflihin adalah menjadi lembaga pendidikan yang unggul dalam
-                        pembentukan
-                        kepribadian santri yang berakhlak mulia, berilmu, dan berwawasan global. Misi Pondok
-                        Pesantren Al Muflihin adalah menjadi lembaga pendidikan yang unggul dalam pembentukan
-                        kepribadian
-                        santri
-                        yang berakhlak mulia, berilmu, dan berwawasan global.
-                    </p>
-                    <!-- Tombol Baca Selengkapnya -->
-                    <div class="mt-6">
-                        <a href="sejarah.html"
-                            class="inline-block rounded-lg bg-primary px-6 py-2 text-white font-semibold shadow-md hover:bg-blue-700 transition duration-300">
-                            Baca Selengkapnya
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="container mx-auto flex flex-wrap items-center">
-                <!-- Teks -->
-                <div class="mb-10 mt-10 w-full px-4 lg:w-1/2 reveal">
-                    <h4 class="mb-3 text-lg font-bold uppercase text-primary">Fasilitas</h4>
-                    <h2 class="mb-5 text-3xl font-bold text-dark dark:text-white lg:text-4xl">
-                        Pondok Pesantren <br> Al-Muflihin
-                    </h2>
-                    <p class="mb-4 text-base font-medium text-secondary lg:text-lg" style="text-align: justify;">
-                        Fasilitas yang dimiliki Pondok Pesantren Al Muflihin antara lain: Asrama, Masjid, Ruang Kelas,
-                        Ruang
-                        Perpustakaan, Ruang Makan, Lapangan Olahraga, dan lain-lain. Fasilitas yang dimiliki Pondok
-                        Pesantren Al
-                        Muflihin antara lain: Asrama, Masjid, Ruang Kelas, Ruang Perpustakaan, Ruang Makan, Lapangan
-                        Olahraga,
-                        dan
-                        lain-lain.
-                    </p>
-                    <!-- Tombol Baca Selengkapnya -->
-                    <div class="mt-6">
-                        <a href="sejarah.html"
-                            class="inline-block rounded-lg bg-primary px-6 py-2 text-white font-semibold shadow-md hover:bg-blue-700 transition duration-300">
-                            Baca Selengkapnya
-                        </a>
-                    </div>
-                </div>
-                <!-- Gambar -->
-                <div class="w-full px-4 lg:w-1/2 reveal-right">
-                    <img src="dist/img/informasi3.JPG" alt="Informasi Al-Muflihin"
-                        class="mx-auto max-w-full rounded-lg shadow-lg">
-                </div>
+<section id="about" class="pt-36 pb-32 dark:bg-dark">
+    <!-- Page Title -->
+    <div class="container bg-gray-100 dark:bg-dark py-16 reveal">
+        <div class="container mx-auto px-4 max-w-3xl lg:max-w-5xl">
+            <div class="breadcrumbs text-secondary dark:text-white pb-5">
+                <ol class="flex space-x-2 text-sm px-4">
+                    <li><a href="index.php" class="hover:text-primary">Beranda |</a></li>
+                    <li class="current text-primary">Tentang</li>
+                </ol>
             </div>
         </div>
     </div>
-</section>
+    <!-- End Page Title -->
+    <div class="container">
+        <?php if ($data->num_rows === 0): ?>
+            <div class="text-center text-gray-600 text-xl">Tidak ada data untuk jenis "<?= htmlspecialchars($jenis) ?>"
+            </div>
+        <?php endif; ?>
 
-<!-- Content End -->
+        <?php foreach ($data as $row): ?>
+            <div
+                class="container mx-auto flex flex-wrap items-center <?= ($row['jenis'] === 'visi_misi') ? 'reveal' : '' ?>">
+                <?php if ($row['jenis'] === 'visi_misi'): ?>
+                    <!-- Gambar Kiri -->
+                    <div class="w-full px-4 lg:w-1/2 reveal-left">
+                        <img src="dist/img/<?= htmlspecialchars($row['gambar']) ?>" alt="Gambar <?= $row['judul'] ?>"
+                            class="mx-auto max-w-full rounded-lg shadow-lg">
+                    </div>
+                    <!-- Teks Kanan -->
+                    <div class="mt-10 mb-10 w-full px-4 lg:w-1/2">
+                    <?php else: ?>
+                        <!-- Teks Kiri -->
+                        <div class="mb-10 mt-10 w-full px-4 lg:w-1/2 reveal">
+                        <?php endif; ?>
+                        <h4 class="mb-3 text-lg font-bold uppercase text-primary"><?= htmlspecialchars($row['sub_judul']) ?>
+                        </h4>
+                        <h2 class="mb-5 text-3xl font-bold text-dark dark:text-white lg:text-4xl">
+                            <?= nl2br(htmlspecialchars($row['judul'])) ?>
+                        </h2>
+                        <p class="mb-4 text-base font-medium text-secondary lg:text-lg text-justify">
+                            <?= substr(strip_tags($row['deskripsi']), 0, 150) ?>...
+                        </p>
+                        <?php if (!$jenis): ?>
+                            <div class="mt-6">
+                                <a href="tentang_detail.php?jenis=<?= urlencode($row['jenis']) ?>"
+                                    class="rounded-lg bg-primary py-3 px-8 text-base font-semibold text-white transition duration-300 ease-in-out hover:opacity-80 hover:shadow-lg">
+                                    Baca Selengkapnya
+                                </a>
+                            </div>
+                        <?php endif; ?>
+
+                    </div>
+                    <?php if ($row['jenis'] !== 'visi_misi'): ?>
+                        <!-- Gambar Kanan -->
+                        <div class="w-full px-4 lg:w-1/2 reveal-right">
+                            <img src="dist/img/<?= htmlspecialchars($row['gambar']) ?>" alt="Gambar <?= $row['judul'] ?>"
+                                class="mx-auto max-w-full rounded-lg shadow-lg">
+                        </div>
+                    <?php endif; ?>
+                </div>
+            <?php endforeach; ?>
+        </div>
+</section>
 
 <!-- Back to top Start -->
 <a href="#about"
@@ -162,7 +121,6 @@ include 'header.php';
 <!-- Back to top End -->
 
 <script src="dist/js/script.js"></script>
-
 <script>
     function revealElements() {
         const reveals = document.querySelectorAll('.reveal, .reveal-right, .reveal-left');
@@ -182,7 +140,4 @@ include 'header.php';
     window.addEventListener('load', revealElements);
 </script>
 
-
-<?php
-include 'footer.php';
-?>
+<?php include 'footer.php'; ?>

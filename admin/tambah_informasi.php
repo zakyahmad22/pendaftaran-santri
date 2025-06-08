@@ -11,24 +11,14 @@ include '../sidebar.php';
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Pendaftaran Santri Baru</title>
-    <!-- <link href="dist/css/final.css" rel="stylesheet" /> -->
+    <title>Tambah Informasi</title>
     <link href="../dist/css/final.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-
-    <!-- <script>
-        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-            document.documentElement.classList.add('dark');
-        } else {
-            document.documentElement.classList.remove('dark');
-        }
-    </script> -->
 </head>
 
 <body>
 
-    <section id="tambah_informasi" class="bg-slate-100 w-full dark:bg-dark">
-        <!-- <div class="container mx-auto px-4 max-w-3xl"> -->
+    <section id="tambah_informasi" class="bg-slate-100 w-full dark:bg-dark min-h-screen">
         <div class="flex-1">
             <header class="bg-white shadow p-4 flex justify-between items-center">
                 <button onclick="toggleSidebar()" class="text-gray-500 focus:outline-none">
@@ -41,18 +31,12 @@ include '../sidebar.php';
                 </button>
                 <h2 class="text-2xl font-bold text-gray-700">Tambah Informasi</h2>
                 <h3 class="text-md font-medium text-secondary md:text-lg"></h3>
-                <!-- <h3 class="text-md font-medium text-secondary md:text-lg"></h3> -->
             </header>
-            <!-- <div class="bg-gray-100 dark:bg-dark py-6 px-6 rounded-lg shadow-lg">
-                <h2 class="text-3xl font-bold text-dark dark:text-white">Tambah Informasi</h2>
-                <p class="text-md font-medium text-secondary md:text-lg">Silakan isi formulir di bawah untuk menambahkan
-                    informasi baru.</p>
-            </div> -->
 
             <div class="mt-8 bg-white p-6 rounded-lg shadow-lg dark:bg-slate-800">
-                <h3 class="pb-3 text-xl font-medium md:text-lg text-dark dark:text-white">Silakan isi formulir di bawah
-                    untuk menambahkan
-                    informasi baru.</h3>
+                <h3 class="pb-3 text-xl font-medium md:text-lg text-dark dark:text-white">
+                    Silakan isi formulir di bawah untuk menambahkan informasi baru.
+                </h3>
                 <form action="tambah_informasi.php" method="POST" enctype="multipart/form-data">
                     <div class="mb-4">
                         <label class="block text-dark dark:text-white font-medium mb-2">Gambar</label>
@@ -85,38 +69,73 @@ include '../sidebar.php';
             </div>
         </div>
     </section>
-    <?php
-    include '../config.php';
 
+    <!-- Modal Sukses -->
+    <div id="successModal"
+        class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 pointer-events-none transition-opacity duration-300 z-50">
+        <div id="modalContent"
+            class="bg-white p-6 rounded-lg shadow-lg text-center w-96 transform scale-95 opacity-0 transition-all duration-300">
+            <h2 class="text-xl font-bold text-green-600 mb-2">Berhasil!</h2>
+            <p class="text-gray-700 mb-4">Informasi berhasil ditambahkan.</p>
+            <button onclick="closeModal()"
+                class="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700">Tutup</button>
+        </div>
+    </div>
+
+    <script>
+        function closeModal() {
+            const modal = document.getElementById('successModal');
+            const content = document.getElementById('modalContent');
+            content.classList.remove('opacity-100', 'scale-100');
+            content.classList.add('opacity-0', 'scale-95');
+            modal.classList.remove('opacity-100');
+            modal.classList.add('opacity-0');
+            setTimeout(() => {
+                modal.classList.add('pointer-events-none');
+                window.history.replaceState(null, null, window.location.pathname);
+            }, 300);
+        }
+
+        <?php if (isset($_GET['status']) && $_GET['status'] === 'sukses'): ?>
+            window.addEventListener('DOMContentLoaded', () => {
+                const modal = document.getElementById('successModal');
+                const content = document.getElementById('modalContent');
+                modal.classList.remove('opacity-0', 'pointer-events-none');
+                modal.classList.add('opacity-100');
+                content.classList.remove('opacity-0', 'scale-95');
+                content.classList.add('opacity-100', 'scale-100');
+            });
+        <?php endif; ?>
+    </script>
+
+    <?php
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $judul = $_POST['judul'];
         $deskripsi = $_POST['deskripsi'];
         $link = $_POST['link'];
 
-        // Memeriksa apakah gambar sudah diupload dengan benar
         if ($_FILES['gambar']['error'] == UPLOAD_ERR_OK) {
             $gambar = $_FILES['gambar']['name'];
             $target_dir = "../uploads/";
             $target_file = $target_dir . basename($gambar);
 
-            // Pindahkan file ke folder uploads
             if (move_uploaded_file($_FILES["gambar"]["tmp_name"], $target_file)) {
-                // Simpan data ke database
                 $query = "INSERT INTO informasi (judul, deskripsi, gambar, link) VALUES ('$judul', '$deskripsi', '$gambar', '$link')";
                 if (mysqli_query($mysqli, $query)) {
-                    // Redirect ke halaman admin jika sukses
-                    header("Location: informasi_admin.php?status=sukses");
-                    exit(); // Menghindari pengiriman ulang form
+                    header("Location: tambah_informasi.php?status=sukses");
+                    exit();
                 } else {
-                    echo "Gagal menyimpan data: " . mysqli_error($mysqli);
+                    echo "<script>alert('Gagal menyimpan data: " . mysqli_error($mysqli) . "');</script>";
                 }
             } else {
-                echo "Gagal mengunggah gambar.";
+                echo "<script>alert('Gagal mengunggah gambar.');</script>";
             }
         } else {
-            echo "Error pada file upload.";
+            echo "<script>alert('Error pada file upload.');</script>";
         }
     }
     ?>
 
 </body>
+
+</html>

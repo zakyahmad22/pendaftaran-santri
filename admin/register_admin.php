@@ -102,6 +102,8 @@ include '../header.php';
             targets.forEach(el => observer.observe(el));
         });
     </script>
+    <script src="../dist/js/script.js"></script>
+
 </body>
 
 </html>

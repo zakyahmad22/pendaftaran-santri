@@ -1,5 +1,6 @@
-<?php include('../header.php'); ?>
-
+<?php
+include('../header.php');
+?>
 
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
@@ -15,14 +16,7 @@
     <!-- Tailwind CSS via CDN -->
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="styles/login.css">
-    <script>
-        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-            document.documentElement.classList.add('dark');
-        } else {
-            document.documentElement.classList.remove('dark');
-        }
-    </script>
+    <link rel="stylesheet" href="../styles/login.css">
 </head>
 
 
@@ -53,11 +47,6 @@
                         </ol>
                     </div>
                 </div>
-
-                <!-- Gambar Login (Tampil hanya di desktop) -->
-                <!-- <div class="hidden md:block md:w-1/2 bg-cover bg-center min-h-screen fade-in-up"
-                    style="background-image: url('dist/img/logo2.png');">
-                </div> -->
 
                 <style>
                     .fade-in-up {
@@ -115,6 +104,8 @@
             targets.forEach(el => observer.observe(el));
         });
     </script>
+
+    <script src="../dist/js/script.js"></script>
 
 </body>
 
