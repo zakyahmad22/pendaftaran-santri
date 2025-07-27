@@ -1,4 +1,5 @@
 <?php
+session_start();
 include 'header.php';
 ?>
 
@@ -31,7 +32,7 @@ include 'header.php';
             transition: background-color 0.3s ease;
         }
     </style>
-    
+
     <!-- Container -->
 
     <section id="blog" class="bg-slate-100 pt-5 pb-5 dark:bg-dark">
@@ -71,7 +72,14 @@ include 'header.php';
                 <div class="w-full md:w-1/2 p-3 mb-16 px-5 fade-in-up">
                     <form method="POST" action="cek_login.php" class="space-y-6">
                         <h1 class="text-dark dark:text-white text-3xl font-bold mb-8">Halaman Login User</h1>
-
+                        <?php
+                        if (session_status() === PHP_SESSION_NONE)
+                            session_start();
+                        if (isset($_SESSION['error'])) {
+                            echo '<div class="mb-4 p-3 bg-red-100 text-red-700 rounded text-center">' . $_SESSION['error'] . '</div>';
+                            unset($_SESSION['error']);
+                        }
+                        ?>
                         <!-- Input Username -->
                         <div>
                             <input type="text" id="name" name="name" placeholder="Username"

@@ -1,9 +1,20 @@
 <?php
 include 'header.php';
 ?>
+<script src="https://cdn.tailwindcss.com"></script>
 
-<body class="pt-9 dark:bg-dark">
-    <section id="pendaftaran" class="pt-36 pb-32">
+<body class="pt-9 dark:bg-dark bg-opacity-10">
+    <!-- Banner Gambar dengan Teks di Tengah -->
+    <!-- <section id="pendaftaran" class="pt-20 h-screen bg-cover bg-center relative"
+        style="background-image: url('dist/img/informasi2.JPG');">
+        <div class="absolute inset-0 bg-black bg-opacity-40"></div>
+        <div class="relative z-10 flex flex-col justify-center items-center h-full text-white text-center">
+            <h1 class="text-5xl font-bold mb-4">Pendaftaran Santri Baru Banget</h1>
+            <p class="text-lg">Pondok Pesantren Al Muflihin - Tahun Ajaran 2025/2026</p>
+        </div>
+    </section> -->
+
+    <section>
         <!-- Page Title -->
         <div class="bg-gray-100 dark:bg-dark py-16" data-aos="fade">
             <div class="container mx-auto px-4 max-w-3xl lg:max-w-5xl">
@@ -22,7 +33,7 @@ include 'header.php';
                 opacity: 0;
                 transform: translateY(50px);
                 transition: all 0.8s ease;
-            } 
+            }
 
             .reveal-bottom.active {
                 opacity: 1;
@@ -31,7 +42,7 @@ include 'header.php';
         </style>
 
         <div
-            class="container mx-auto px-4 bg-white rounded-lg shadow-lg dark:bg-dark dark:shadow-slate-500 reveal-bottom">
+            class="container mx-auto px-4 py-10 bg-white rounded-xl shadow-md border border-gray-200 dark:bg-dark dark:border-slate-700 reveal-bottom">
             <div class="w-full">
                 <div class="mx-auto mb-16 max-w-xl text-center">
                     <h2 class="mt-5 mb-5 text-3xl font-bold text-dark dark:text-white lg:text-4xl">

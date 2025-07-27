@@ -2,7 +2,6 @@
 include 'header.php';
 ?>
 
-
 <!-- Swiper CSS -->
 <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
 
@@ -90,47 +89,102 @@ $data = $kontak_deskripsi->fetch_assoc();
 $lokasi_section = $mysqli->query("SELECT * FROM lokasi_section LIMIT 1");
 $lokasi = $lokasi_section->fetch_assoc();
 
+// Efek slider 
+$heroList = [];
+$query = mysqli_query($conn, "SELECT * FROM hero_section ORDER BY id DESC");
+while ($row = mysqli_fetch_assoc($query)) {
+  $heroList[] = $row;
+}
+// ambil data dari kontak
+$query = mysqli_query($conn, "SELECT * FROM kontak");
+
 ?>
+
+<!-- Swiper CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
 <!-- Hero Section Start -->
 <section id="home" class="pt-36 dark:bg-dark">
-  <div class="container">
-    <div class="flex flex-wrap">
-      <div class="w-full self-center px-4 lg:w-1/2 opacity-0 translate-y-10 transition-all duration-1000 ease-out"
-        id="heroText">
-        <h1 class="text-base font-semibold text-primary md:text-xl">
-          <?= htmlspecialchars($hero['judul_kecil']) ?>
-          <span class="mt-1 block text-4xl font-bold text-dark dark:text-white lg:text-5xl">
-            <?= htmlspecialchars($hero['judul_besar']) ?>
-          </span>
-        </h1>
-        <p class="mb-10 font-medium leading-relaxed text-secondary">
-          <?= htmlspecialchars($hero['deskripsi']) ?>
-        </p>
-        <a href="<?= htmlspecialchars($hero['link_pendaftaran']) ?>"
-          class="rounded-full bg-primary py-3 px-8 text-base font-semibold text-white transition duration-300 ease-in-out hover:opacity-80 hover:shadow-lg">
-          Daftar Sekarang
-        </a>
-      </div>
-      <div
-        class="w-full self-end px-4 lg:w-1/2 opacity-0 translate-y-10 transition-all duration-1000 ease-out delay-200"
-        id="heroImage">
-        <div class="relative mt-10 lg:right-0 lg:mt-9">
-          <img src="upload_hero_section/<?= htmlspecialchars($hero['gambar']) ?>" alt="Gambar Hero" width="400"
-            height="400" class="relative z-10 mx-auto max-w-full" />
-          <span class="absolute bottom-0 left-1/2 -translate-x-1/2 md:scale-125">
-            <svg width="400" height="400" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-              <path fill="#14b8a6"
-                d="M62.4,-52.5C73.7,-35.7,70.6,-10.1,64.2,13.4C57.9,37,48.2,58.5,32.2,65.9C16.1,73.3,-6.3,66.4,-27.2,56.4C-48,46.3,-67.3,33.1,-72.3,15.4C-77.3,-2.3,-67.9,-24.5,-53.4,-42.1C-39,-59.7,-19.5,-72.7,3,-75.2C25.6,-77.6,51.1,-69.4,62.4,-52.5Z"
-                transform="translate(100 100) scale(1.1)" />
-            </svg>
-          </span>
+  <div class="swiper myHeroSwiper">
+    <div class="swiper-wrapper">
+      <?php foreach ($heroList as $hero): ?>
+        <div class="swiper-slide">
+          <div class="container">
+            <div class="flex flex-wrap">
+              <!-- Text -->
+              <div class="w-full self-center px-4 lg:w-1/2">
+                <h1 class="text-base font-semibold text-primary md:text-xl">
+                  <?= htmlspecialchars($hero['judul_kecil']) ?>
+                  <span class="mt-1 block text-4xl font-bold text-dark dark:text-white lg:text-5xl">
+                    <?= htmlspecialchars($hero['judul_besar']) ?>
+                  </span>
+                </h1>
+                <p class="mb-10 font-medium leading-relaxed text-secondary">
+                  <?= htmlspecialchars($hero['deskripsi']) ?>
+                </p>
+                <a href="<?= htmlspecialchars($hero['link_pendaftaran']) ?>"
+                  class="rounded-full bg-primary py-3 px-8 text-base font-semibold text-white transition duration-300 ease-in-out hover:opacity-80 hover:shadow-lg">
+                  Daftar Sekarang
+                </a>
+              </div>
+              <!-- Image -->
+              <!-- Image -->
+              <div class="w-full self-end px-4 lg:w-1/2">
+                <div class="relative mt-10 lg:right-0 lg:mt-9">
+                  <!-- Gambar Hero -->
+                  <img src="upload_hero_section/<?= htmlspecialchars($hero['gambar']) ?>" alt="Gambar Hero" width="400"
+                    height="400" class="relative z-10 mx-auto max-w-full" />
+
+                  <!-- Gelembung SVG -->
+                  <span
+                    class="absolute bottom-0 left-1/2 -translate-x-1/2 z-0 w-[280px] h-[280px] sm:w-[320px] sm:h-[320px] md:w-[380px] md:h-[380px] lg:w-[420px] lg:h-[420px] xl:w-[480px] xl:h-[480px]">
+                    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
+                      <path fill="#14b8a6"
+                        d="M62.4,-52.5C73.7,-35.7,70.6,-10.1,64.2,13.4C57.9,37,48.2,58.5,32.2,65.9C16.1,73.3,-6.3,66.4,-27.2,56.4C-48,46.3,-67.3,33.1,-72.3,15.4C-77.3,-2.3,-67.9,-24.5,-53.4,-42.1C-39,-59.7,-19.5,-72.7,3,-75.2C25.6,-77.6,51.1,-69.4,62.4,-52.5Z"
+                        transform="translate(100 100) scale(1)" />
+                    </svg>
+                  </span>
+
+                </div>
+              </div>
+
+            </div>
+          </div>
         </div>
-      </div>
+      <?php endforeach; ?>
     </div>
+
+    <!-- Navigasi -->
+    <div class="swiper-pagination mt-6"></div>
+    <div class="swiper-button-next text-primary"></div>
+    <div class="swiper-button-prev text-primary"></div>
   </div>
 </section>
 <!-- Hero Section End -->
+
+<!-- Swiper JS -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+<!-- Swiper Init -->
+<script>
+  const swiper = new Swiper('.myHeroSwiper', {
+    loop: true,
+    speed: 1200, // transisi smooth
+    autoplay: {
+      delay: 7000, // lebih lama tunggu antar slide
+      disableOnInteraction: false,
+    },
+    pagination: {
+      el: '.swiper-pagination',
+      clickable: true,
+    },
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+    },
+  });
+</script>
+
 
 <!-- About Section Start -->
 <section id="about" class="pt-32 pb-10 dark:bg-dark">
@@ -245,51 +299,61 @@ $lokasi = $lokasi_section->fetch_assoc();
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8">
         <!-- Kolom 1 -->
-        <div class="bg-white p-6 rounded-lg shadow-md reveal">
+        <div
+          class="bg-white p-6 rounded-lg shadow-md transition-transform duration-300 transform hover:scale-105 hover:shadow-xl">
           <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor"
             class="bi bi-file-earmark-text-fill mx-auto" viewBox="0 0 16 16">
             <path
               d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0M9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1M4.5 9a.5.5 0 0 1 0-1h7a.5.5 0 0 1 0 1zM4 10.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5m.5 2.5a.5.5 0 0 1 0-1h4a.5.5 0 0 1 0 1z" />
           </svg>
-          <h2 class="text-2xl font-bold font-sans mt-4 reveal"><?= htmlspecialchars($falsafah['judul1']) ?></h2>
-          <p class="mt-2 reveal"><?= nl2br(htmlspecialchars($falsafah['isi1'])) ?></p>
+          <h2 class="text-2xl font-bold font-sans mt-4">
+            <?= htmlspecialchars($falsafah['judul1']) ?>
+          </h2>
+          <p class="mt-2"><?= nl2br(htmlspecialchars($falsafah['isi1'])) ?></p>
           <a href="<?= htmlspecialchars($falsafah['link1']) ?>">
             <button
-              class="rounded-full bg-primary mt-4 py-2 px-6 text-base font-semibold text-white transition duration-300 ease-in-out hover:opacity-80 hover:shadow-lg reveal">
+              class="rounded-full bg-primary mt-4 py-2 px-6 text-base font-semibold text-white transition duration-300 ease-in-out hover:opacity-80 hover:shadow-lg">
               Baca Selengkapnya
             </button>
           </a>
         </div>
 
         <!-- Kolom 2 -->
-        <div class="bg-white p-6 rounded-lg shadow-md reveal">
+        <div
+          class="bg-white p-6 rounded-lg shadow-md transition-transform duration-300 transform hover:scale-105 hover:shadow-xl">
           <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor"
             class="bi bi-chat-square-text-fill mx-auto" viewBox="0 0 16 16">
             <path
               d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-2.5a1 1 0 0 0-.8.4l-1.9 2.533a1 1 0 0 1-1.6 0L5.3 12.4a1 1 0 0 0-.8-.4H2a2 2 0 0 1-2-2zm3.5 1a.5.5 0 0 0 0 1h9a.5.5 0 0 0 0-1zm0 2.5a.5.5 0 0 0 0 1h9a.5.5 0 0 0 0-1zm0 2.5a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1z" />
           </svg>
-          <h2 class="text-2xl font-bold font-sans mt-4 reveal"><?= htmlspecialchars($falsafah['judul2']) ?></h2>
-          <p class="mt-2 reveal"><?= nl2br(htmlspecialchars($falsafah['isi2'])) ?></p>
+          <h2 class="text-2xl font-bold font-sans mt-4"><?= htmlspecialchars($falsafah['judul2']) ?>
+          </h2>
+          <p class="mt-2">
+            <?= nl2br(htmlspecialchars($falsafah['isi2'])) ?>
+          </p>
           <a href="<?= htmlspecialchars($falsafah['link2']) ?>">
             <button
-              class="rounded-full bg-primary mt-4 py-2 px-6 text-base font-semibold text-white transition duration-300 ease-in-out hover:opacity-80 hover:shadow-lg reveal">
+              class="rounded-full bg-primary mt-4 py-2 px-6 text-base font-semibold text-white transition duration-300 ease-in-out hover:opacity-80 hover:shadow-lg">
               Baca Selengkapnya
             </button>
           </a>
         </div>
 
         <!-- Kolom 3 -->
-        <div class="bg-white p-6 rounded-lg shadow-md reveal">
+        <div
+          class="bg-white p-6 rounded-lg shadow-md transition-transform duration-300 transform hover:scale-105 hover:shadow-xl">
           <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor"
             class="bi bi-bag-dash-fill mx-auto" viewBox="0 0 16 16">
             <path fill-rule="evenodd"
               d="M10.5 3.5a2.5 2.5 0 0 0-5 0V4h5zm1 0V4H15v10a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V4h3.5v-.5a3.5 3.5 0 1 1 7 0M6 9.5a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1z" />
           </svg>
-          <h2 class="text-2xl font-bold font-sans mt-4 reveal"><?= htmlspecialchars($falsafah['judul3']) ?></h2>
-          <p class="mt-2 reveal"><?= nl2br(htmlspecialchars($falsafah['isi3'])) ?></p>
-          <a href="<?= htmlspecialchars($falsafah['link3']) ?>">
-            <button
-              class="rounded-full bg-primary mt-4 py-2 px-6 text-base font-semibold text-white transition duration-300 ease-in-out hover:opacity-80 hover:shadow-lg reveal">
+          <h2 class="text-2xl font-bold font-sans mt-4"><?= htmlspecialchars($falsafah['judul3']) ?>
+          </h2>
+          <p class="mt-2">
+            <?= nl2br(htmlspecialchars($falsafah['isi3'])) ?>
+          </p>
+          <a href="<?= htmlspecialchars($falsafah['link3']) ?>"> <button
+              class="rounded-full bg-primary mt-4 py-2 px-6 text-base font-semibold text-white transition duration-300 ease-in-out hover:opacity-80 hover:shadow-lg">
               Baca Selengkapnya
             </button>
           </a>
@@ -302,10 +366,10 @@ $lokasi = $lokasi_section->fetch_assoc();
 <!-- falsafah end -->
 
 <!-- Pendaftaran Section Start -->
-<section id="clients" class="bg-slate-800 pt-36 pb-32 dark:bg-slate-300">
+<section id="clients" class="bg-slate-800 pt-32 pb-32 dark:bg-slate-300">
   <div class="container">
     <div class="w-full px-4">
-      <div class="mx-auto mb-16 text-center reveal">
+      <div class="mx-auto text-center reveal">
         <h4 class="mb-2 text-3xl font-bold text-primary reveal">
           <?= htmlspecialchars($pendaftaran['sub_judul']); ?>
         </h4>
@@ -337,7 +401,7 @@ $lokasi = $lokasi_section->fetch_assoc();
   }
 </style>
 
-<section id="alumni" class="bg-slate-100 pt-36 pb-16 dark:bg-slate-800">
+<section id="alumni" class="bg-slate-100 pt-16 pb-16 dark:bg-slate-800">
   <div class="w-full px-4 reveal">
     <div class="mx-auto mb-16 max-w-xl text-center reveal">
       <h2 class="mb-4 text-3xl font-bold text-dark dark:text-white sm:text-4xl lg:text-5xl reveal">
@@ -400,19 +464,20 @@ $lokasi = $lokasi_section->fetch_assoc();
     <p class="text-md font-medium text-secondary md:text-lg reveal">
       <?= nl2br(htmlspecialchars($data['deskripsi'])) ?>
     </p>
-    <div class="flex justify-center flex-wrap gap-4 mt-10 reveal">
+    <div class="flex justify-center flex-wrap gap-4 mt-10">
       <?php while ($row = mysqli_fetch_assoc($query)): ?>
-        <div class="bg-white dark:bg-slate-700 p-4 rounded-lg shadow-md text-center w-64 reveal">
-          <div class="mb-3 reveal">
+        <div class="bg-white dark:bg-slate-700 p-4 rounded-lg shadow-md text-center w-64 
+                    transition-transform transform hover:scale-105 hover:shadow-lg duration-300 ease-in-out">
+          <div class="mb-3">
             <?= $row['icon'] ?>
           </div>
-          <h4 class="text-secondary font-semibold reveal">
+          <h4 class="text-secondary font-semibold">
             <?= $row['nama'] ?>
           </h4>
-          <p class="text-secondary reveal">
+          <p class="text-secondary">
             <?= $row['jabatan'] ?>
           </p>
-          <p class="text-secondary reveal">
+          <p class="text-secondary">
             <?= $row['nomor_hp'] ?>
           </p>
         </div>
@@ -422,8 +487,10 @@ $lokasi = $lokasi_section->fetch_assoc();
 </section>
 <!-- Contact Section End -->
 
+
+
 <!-- Lokasi Kami Start -->
-<section id="lokasi" class="pt-36 pb-32 bg-slate-100 dark:bg-slate-800">
+<section id="lokasi" class="pt-16 pb-16 bg-slate-100 dark:bg-slate-800">
   <div class="container mx-auto text-center reveal">
     <h2 class="mb-4 text-3xl font-bold text-dark dark:text-white sm:text-4xl lg:text-5xl reveal">
       <span class="text-primary"><?= htmlspecialchars($lokasi['judul_awal']); ?></span>
@@ -490,6 +557,9 @@ include 'footer.php';
     });
   });
 </script>
+
+<!-- Swiper JS -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
 
 </body>

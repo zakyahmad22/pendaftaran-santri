@@ -1,5 +1,6 @@
 <?php
 
+session_start();
 // koneksi database
 $host = 'localhost';
 $user = 'root';
@@ -66,11 +67,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 WHERE id=$id";
         }
         $conn->query($sql);
+        $_SESSION['berhasil'] = 'Data berhasil diedit!';
     } else {
         $sql = "INSERT INTO hero_section 
             (judul_kecil, judul_besar, deskripsi, gambar, link_pendaftaran)
             VALUES ('$judul_kecil', '$judul_besar', '$deskripsi', '$gambar', '$link_pendaftaran')";
         $conn->query($sql);
+        $_SESSION['berhasil'] = 'Data berhasil ditambahkan!';
     }
     header('Location: kelola_hero_section.php');
     exit;
@@ -85,7 +88,13 @@ if (isset($_GET['edit'])) {
     if ($resEdit)
         $editData = $resEdit->fetch_assoc();
 }
-include '../sidebar.php';
+
+$pesan_berhasil = '';
+if (isset($_SESSION['berhasil'])) {
+    $pesan_berhasil = $_SESSION['berhasil'];
+    unset($_SESSION['berhasil']);
+}
+include 'sidebar.php';
 ?>
 
 <!DOCTYPE html>
@@ -101,7 +110,7 @@ include '../sidebar.php';
 <body class="bg-gray-100 font-sans">
 
     <section id="kelola_hero_section" class="bg-slate-100 w-full dark:bg-dark">
-        <header class="bg-white shadow p-4 flex justify-between items-center">
+        <header class="fixed top-0 left-0 right-0 z-40 bg-white shadow p-4 flex justify-between items-center ml-64">
             <button onclick="toggleSidebar()" class="text-gray-500 focus:outline-none">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                     xmlns="http://www.w3.org/2000/svg">
@@ -112,65 +121,60 @@ include '../sidebar.php';
             <h2 class="text-2xl font-bold text-gray-700">Kelola Hero Section</h2>
             <h3 class="text-md font-medium text-secondary md:text-lg"></h3>
         </header>
-        <div class="bg-white shadow-md rounded p-6 max-w-6xl mx-auto">
-            <h3 class="pb-3 text-xl font-medium md:text-lg text-dark dark:text-white">Halaman ini digunakan untuk
-                mengelola
-                hero section
-                yang ditampilkan pada website.</h3>
-            <div class="bg-white shadow-md rounded p-6 max-w-6xl mx-auto">
-                <h2 class="text-2xl font-semibold mb-4"><?= $editData ? 'Edit Hero Section' : 'Tambah Hero Section' ?>
-                </h2>
-                <form action="" method="post" enctype="multipart/form-data" class="space-y-4">
-                    <input type="hidden" name="id" value="<?= $editData['id'] ?? 0 ?>" />
+        <div class="ml-64 pt-20 pb-5 bg-white p-6 rounded-lg shadow-lg dark:bg-slate-800">
+            <h1 class="text-xl font-semibold mb-4"><?= $editData ? 'Edit Hero Section' : 'Tambah Hero Section' ?>
+            </h1>
+            <form action="" method="post" enctype="multipart/form-data" class="space-y-4">
+                <input type="hidden" name="id" value="<?= $editData['id'] ?? 0 ?>" />
 
-                    <div>
-                        <label class="block font-medium mb-1">Judul Kecil</label>
-                        <input type="text" name="judul_kecil" required class="w-full border rounded px-3 py-2"
-                            value="<?= htmlspecialchars($editData['judul_kecil'] ?? '') ?>" />
-                    </div>
+                <div>
+                    <label class="block font-medium mb-1">Judul Kecil</label>
+                    <input type="text" name="judul_kecil" required class="w-full border rounded px-3 py-2"
+                        value="<?= htmlspecialchars($editData['judul_kecil'] ?? '') ?>" />
+                </div>
 
-                    <div>
-                        <label class="block font-medium mb-1">Judul Besar</label>
-                        <input type="text" name="judul_besar" required class="w-full border rounded px-3 py-2"
-                            value="<?= htmlspecialchars($editData['judul_besar'] ?? '') ?>" />
-                    </div>
+                <div>
+                    <label class="block font-medium mb-1">Judul Besar</label>
+                    <input type="text" name="judul_besar" required class="w-full border rounded px-3 py-2"
+                        value="<?= htmlspecialchars($editData['judul_besar'] ?? '') ?>" />
+                </div>
 
-                    <div>
-                        <label class="block font-medium mb-1">Deskripsi</label>
-                        <textarea name="deskripsi" rows="4" required
-                            class="w-full border rounded px-3 py-2"><?= htmlspecialchars($editData['deskripsi'] ?? '') ?></textarea>
-                    </div>
+                <div>
+                    <label class="block font-medium mb-1">Deskripsi</label>
+                    <textarea name="deskripsi" rows="4" required
+                        class="w-full border rounded px-3 py-2"><?= htmlspecialchars($editData['deskripsi'] ?? '') ?></textarea>
+                </div>
 
-                    <div>
-                        <label class="block font-medium mb-1">Link Pendaftaran</label>
-                        <input type="url" name="link_pendaftaran" class="w-full border rounded px-3 py-2"
-                            value="<?= htmlspecialchars($editData['link_pendaftaran'] ?? '') ?>" />
-                    </div>
+                <div>
+                    <label class="block font-medium mb-1">Link Pendaftaran</label>
+                    <input type="url" name="link_pendaftaran" class="w-full border rounded px-3 py-2"
+                        value="<?= htmlspecialchars($editData['link_pendaftaran'] ?? '') ?>" />
+                </div>
 
-                    <div>
-                        <label class="block font-medium mb-1">Gambar Hero</label>
-                        <input type="file" name="gambar" class="w-full border rounded px-3 py-2" <?= $editData ? '' : 'required' ?> />
-                        <?php if ($editData && $editData['gambar']): ?>
-                            <img src="../upload_hero_section/<?= htmlspecialchars($row['gambar']) ?>" />
-                            <p class="text-sm text-gray-500">Gambar saat ini: <?= htmlspecialchars($editData['gambar']) ?>
-                            </p>
-                        <?php endif; ?>
-                    </div>
+                <div>
+                    <label class="block font-medium mb-1">Gambar Hero</label>
+                    <input type="file" name="gambar" class="w-full border rounded px-3 py-2" <?= $editData ? '' : 'required' ?> />
+                    <?php if ($editData && $editData['gambar']): ?>
+                        <img src="../upload_hero_section/<?= htmlspecialchars($row['gambar']) ?>" />
+                        <p class="text-sm text-gray-500">Gambar saat ini: <?= htmlspecialchars($editData['gambar']) ?>
+                        </p>
+                    <?php endif; ?>
+                </div>
 
-                    <div class="pt-4 flex items-center gap-4">
-                        <button class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition">
-                            Tambah
-                        </button>
-                        <?php if ($editData): ?>
-                            <a href="kelola_hero_section.php"
-                                class="bg-red-600 text-white px-6 py-2 rounded hover:bg-red-700 transition inline-block">
-                                Batal
-                            </a>
-                        <?php endif; ?>
-                    </div>
+                <div class="pt-4 flex items-center gap-4">
+                    <button class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition">
+                        Simpan
+                    </button>
+                    <?php if ($editData): ?>
+                        <a href="kelola_hero_section.php"
+                            class="bg-red-600 text-white px-6 py-2 rounded hover:bg-red-700 transition inline-block">
+                            Batal
+                        </a>
+                    <?php endif; ?>
+                </div>
 
-                </form>
-            </div>
+            </form>
+
 
             <div class="bg-white shadow-md rounded p-6 max-w-6xl mx-auto">
                 <h2 class="text-2xl font-semibold mb-4">Daftar Hero Section</h2>
@@ -211,11 +215,11 @@ include '../sidebar.php';
                                         </a>
                                     </td>
                                     <td class="p-3 border text-center">
-                                        <a href="?edit=<?= $row['id'] ?>"
+                                        <a href="javascript:void(0)" onclick="konfirmasiEdit(<?= $row['id'] ?>)"
                                             class="text-yellow-600 hover:underline font-medium">Edit</a> |
-                                        <a href="?delete=<?= $row['id'] ?>"
-                                            onclick="return confirm('Yakin ingin menghapus?')"
+                                        <a href="javascript:void(0)" onclick="konfirmasiHapus(<?= $row['id'] ?>)"
                                             class="text-red-600 hover:underline font-medium">Hapus</a>
+
                                     </td>
                                 </tr>
                             <?php endwhile; ?>
@@ -224,9 +228,93 @@ include '../sidebar.php';
                     </table>
                 </div>
             </div>
-
-        </div>
     </section>
+
+    <!-- Modal Konfirmasi -->
+    <div id="modalKonfirmasi" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
+        <div class="bg-white p-6 rounded-lg shadow-lg w-96">
+            <h2 class="text-xl font-semibold mb-4" id="modalJudul">Konfirmasi</h2>
+            <p class="mb-6" id="modalPesan">Apakah Anda yakin?</p>
+            <div class="flex justify-end space-x-3">
+                <button onclick="tutupModal()" class="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400">Batal</button>
+                <a id="modalBtnLanjut" href="#"
+                    class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700">Lanjutkan</a>
+            </div>
+        </div>
+    </div>
+    <!-- Modal Berhasil -->
+    <div id="modalBerhasil" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
+        <div class="bg-white p-6 rounded-lg shadow-lg w-96 text-center">
+            <h2 class="text-xl font-semibold mb-4 text-green-600">Berhasil!</h2>
+            <p class="mb-6" id="pesanBerhasil">Data berhasil disimpan.</p>
+            <button onclick="tutupModalBerhasil()"
+                class="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700">Tutup</button>
+        </div>
+    </div>
+
+    <!-- script modal -->
+    <script>
+        function tutupModal() {
+            document.getElementById('modalKonfirmasi').classList.add('hidden');
+        }
+
+        function bukaModal(judul, pesan, linkTujuan) {
+            document.getElementById('modalJudul').innerText = judul;
+            document.getElementById('modalPesan').innerText = pesan;
+            document.getElementById('modalBtnLanjut').href = linkTujuan;
+            document.getElementById('modalKonfirmasi').classList.remove('hidden');
+        }
+
+        function konfirmasiEdit(id) {
+            bukaModal("Edit Data", "Anda yakin ingin mengedit data ini?", "?edit=" + id);
+        }
+
+        function konfirmasiHapus(id) {
+            bukaModal("Hapus Data", "Data yang dihapus tidak dapat dikembalikan. Yakin ingin menghapus?", "?delete=" + id);
+        }
+
+        // Modal simpan saat submit form
+        document.querySelector("form").addEventListener("submit", function (e) {
+            e.preventDefault(); // cegah submit langsung
+            bukaModal("Simpan Data", "Apakah Anda yakin ingin menyimpan data ini?", "#");
+            document.getElementById("modalBtnLanjut").onclick = () => {
+                this.submit();
+            };
+        });
+    </script>
+
+    <!-- modal berhasil -->
+    <script>
+        function tutupModalBerhasil() {
+            document.getElementById('modalBerhasil').classList.add('hidden');
+        }
+
+        <?php if (!empty($pesan_berhasil)): ?>
+            window.addEventListener('DOMContentLoaded', () => {
+                document.getElementById('pesanBerhasil').innerText = <?= json_encode($pesan_berhasil) ?>;
+                document.getElementById('modalBerhasil').classList.remove('hidden');
+            });
+        <?php endif; ?>
+    </script>
+
+    <script>
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const mainContent = document.querySelector('#kelola_hero_section > div');
+            const header = document.querySelector('#kelola_hero_section > header');
+
+            if (sidebar.classList.contains('-ml-64')) {
+                sidebar.classList.remove('-ml-64');
+                mainContent.classList.add('ml-64');
+                header.classList.add('ml-64');
+            } else {
+                sidebar.classList.add('-ml-64');
+                mainContent.classList.remove('ml-64');
+                header.classList.remove('ml-64');
+            }
+        }
+    </script>
+
 </body>
 
 </html>

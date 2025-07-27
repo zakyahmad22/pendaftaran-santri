@@ -1,0 +1,102 @@
+<?php
+include '../header.php';
+include '../config.php'; // koneksi database
+
+// Ambil data alur dari database
+$result = $mysqli->query("SELECT * FROM alur_pendaftaran ORDER BY urutan ASC");
+$alur = $result->fetch_all(MYSQLI_ASSOC);
+?>
+
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pendaftaran Santri Baru</title>
+    <link href="../dist/css/final.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <script>
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+    </script>
+</head>
+
+
+<body>
+    <section class="bg-slate-100 pt-36 pb-32 dark:bg-dark">
+        <!-- Page Title -->
+        <div class="bg-gray-100 dark:bg-dark">
+            <div class="container mx-auto px-4 max-w-3xl lg:max-w-5xl">
+                <div class="breadcrumbs text-secondary dark:text-white pb-3">
+                    <ol class="flex space-x-2 text-sm px-4 pb-5">
+                        <li><a href="../index.php" class="hover:text-primary">Beranda |</a></li>
+                        <li class="current text-primary">Alur Pendaftaran</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+        <!-- End Page Title -->
+
+        <div class="container max-w-6xl mx-auto px-4">
+            <!-- Judul -->
+            <h1 id="judulAlur"
+                class="text-3xl font-bold text-center text-dark dark:text-white mb-12 opacity-0 translate-y-10 transition-all duration-700">
+                Alur Pendaftaran Santri Baru
+            </h1>
+
+            <!-- Card Alur -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                <?php foreach ($alur as $step): ?>
+                    <div class="alur-step opacity-0 translate-y-10 transition-all duration-700 
+                        bg-white dark:bg-slate-800 shadow-md border border-gray-200 dark:border-slate-700 
+                        rounded-lg p-6 hover:scale-105 hover:shadow-xl transition duration-300 ease-in-out">
+                        <div class="text-primary text-4xl font-bold mb-4 text-center"><?= $step['urutan'] ?></div>
+                        <h3 class="text-xl font-semibold text-dark dark:text-white mb-2 text-center">
+                            <?= htmlspecialchars($step['judul']) ?>
+                        </h3>
+                        <p class="text-sm text-secondary dark:text-gray-300 text-center">
+                            <?= htmlspecialchars($step['deskripsi']) ?>
+                        </p>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+
+            <!-- Tombol Aksi -->
+            <div class="text-center mt-10">
+                <a href="../form_pendaftaran.php"
+                    class="inline-block bg-primary text-white px-6 py-3 rounded-full font-semibold hover:bg-opacity-90 transition">
+                    Mulai Pendaftaran
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Animasi -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Animasikan judul
+            document.getElementById('judulAlur').classList.remove('opacity-0', 'translate-y-10');
+
+            // Animasikan setiap card
+            const steps = document.querySelectorAll('.alur-step');
+            steps.forEach((step, i) => {
+                setTimeout(() => {
+                    step.classList.remove('opacity-0', 'translate-y-10');
+                    step.classList.add('opacity-100', 'translate-y-0');
+                }, 500 + i * 200);
+            });
+        });
+    </script>
+
+    <?php include '../footer.php'; ?>
+</body>
+
+<script src="../dist/js/script.js"></script>
+
+</html>

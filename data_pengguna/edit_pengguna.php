@@ -1,7 +1,7 @@
 <?php
 ob_start();  // Tambahkan ini di awal file edit_pengguna.php
 include '../config.php';
-include '../sidebar.php';
+include '../admin/sidebar.php';
 
 // Cek jika session sudah dimulai, jika belum baru panggil session_start()
 if (session_status() == PHP_SESSION_NONE) {
@@ -76,23 +76,24 @@ if (isset($_GET['id'])) {
 
 </head>
 
-<body>
-    <section id="edit_pengguna" class="bg-slate-100 w-full dark:bg-dark">
-        <div class="flex-1">
-            <header class="bg-white shadow p-4 flex justify-between items-center">
-                <button onclick="toggleSidebar()" class="text-gray-500 focus:outline-none">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M4 6h16M4 12h16m-7 6h7">
-                        </path>
-                    </svg>
-                </button>
-                <h2 class="text-2xl font-bold text-gray-700">Edit Pengguna</h2>
-                <h3 class="text-md font-medium text-secondary md:text-lg"></h3>
-            </header>
+<body class="bg-gray-100">
 
-            <div class="mt-8 bg-white p-6 rounded-lg shadow-lg dark:bg-slate-800">
+    <section id="edit_pengguna" class="bg-slate-100 w-full dark:bg-dark">
+        <!-- Header disamakan -->
+        <header class="fixed top-0 left-0 right-0 z-40 bg-white shadow-md p-4 flex justify-between items-center ml-64">
+            <button onclick="toggleSidebar()" class="text-gray-500 focus:outline-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                </svg>
+            </button>
+            <h2 class="text-2xl font-bold text-gray-700">Edit Pengguna</h2>
+            <h3 class="text-md font-medium text-secondary md:text-lg"></h3>
+        </header>
+
+        <!-- Konten utama -->
+        <div class="ml-64 pt-20 px-6 pb-10">
+            <div class="bg-white p-6 rounded-lg shadow-lg dark:bg-slate-800">
                 <form action="edit_pengguna.php?id=<?php echo $user['id']; ?>" method="POST">
                     <div class="mb-4">
                         <label for="username" class="block text-dark dark:text-white font-medium mb-2">Username</label>
@@ -120,11 +121,33 @@ if (isset($_GET['id'])) {
                 </form>
             </div>
         </div>
-    </section>
+
+        <!-- Footer -->
+        <footer class="bg-white text-gray-700 p-4 text-center w-full border-t">
+            &copy; 2025 Pondok Pesantren Al-Muflihin | Gebang Ilir, Gebang, Cirebon, Jawa Barat.
+        </footer>
+
+
+        <!-- Script Sidebar Toggle -->
+        <script>
+            function toggleSidebar() {
+                const sidebar = document.getElementById('sidebar');
+                const headers = document.querySelectorAll('header');
+                const contents = document.querySelectorAll('section > div');
+
+                if (sidebar.classList.contains('-ml-64')) {
+                    sidebar.classList.remove('-ml-64');
+                    headers.forEach(h => h.classList.add('ml-64'));
+                    contents.forEach(c => c.classList.add('ml-64'));
+                } else {
+                    sidebar.classList.add('-ml-64');
+                    headers.forEach(h => h.classList.remove('ml-64'));
+                    contents.forEach(c => c.classList.remove('ml-64'));
+                }
+            }
+        </script>
+
 </body>
 
-</html>
 
-<?php
-$mysqli->close();
-?>
+</html>

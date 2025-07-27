@@ -1,6 +1,6 @@
 <?php
 include '../config.php';
-include '../sidebar.php';
+include 'sidebar.php';
 
 $showSuccess = isset($_GET['status']) && $_GET['status'] === 'hapus_sukses';
 ?>
@@ -18,66 +18,75 @@ $showSuccess = isset($_GET['status']) && $_GET['status'] === 'hapus_sukses';
     <link rel="shortcut icon" type="image/png" href="../dist/img/logo.png?v=1">
 </head>
 
-<body>
+<body class="bg-gray-100">
 
     <section id="informasi_admin" class="bg-slate-100 w-full dark:bg-dark">
-        <header class="bg-white shadow p-4 flex justify-between items-center">
+
+        <!-- HEADER -->
+        <header class="fixed top-0 left-0 right-0 z-40 bg-white shadow-md p-4 flex justify-between items-center ml-64 transition-all duration-300">
             <button onclick="toggleSidebar()" class="text-gray-500 focus:outline-none">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                     xmlns="http://www.w3.org/2000/svg">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7">
-                    </path>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
                 </svg>
             </button>
             <h2 class="text-2xl font-bold text-gray-700">Kelola Informasi</h2>
             <h3 class="text-md font-medium text-secondary md:text-lg"></h3>
         </header>
-        <div class="mt-8 bg-white p-6 rounded-lg shadow-lg dark:bg-slate-800">
-            <div class="flex justify-between items-center mb-4">
-                <h3 class="text-xl font-semibold text-dark dark:text-white">Daftar Informasi</h3>
-                <a href="tambah_informasi.php"
-                    class="bg-primary text-white px-4 py-2 rounded-lg hover:opacity-80">Tambah Informasi</a>
-            </div>
 
-            <div class="overflow-x-auto">
-                <h3 class="pb-3 text-xl font-medium md:text-lg text-dark dark:text-white">Halaman ini digunakan untuk
-                    mengelola informasi yang ditampilkan pada website.</h3>
-                <table class="w-full border-collapse border border-gray-200 dark:border-gray-700">
-                    <thead>
-                        <tr class="bg-gray-100 dark:bg-gray-700 text-left">
-                            <th class="p-3 border border-gray-300 dark:border-gray-600">Gambar</th>
-                            <th class="p-3 border border-gray-300 dark:border-gray-600">Judul</th>
-                            <th class="p-3 border border-gray-300 dark:border-gray-600">Deskripsi</th>
-                            <th class="p-3 border border-gray-300 dark:border-gray-600">Aksi</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                        $result = mysqli_query($mysqli, "SELECT * FROM informasi ORDER BY id_info DESC");
-                        while ($row = mysqli_fetch_assoc($result)) {
-                            echo "<tr>
-                            <td class='p-3 border border-gray-300 dark:border-gray-600'>
-                                <img src='../uploads/{$row['gambar']}' alt='Informasi' class='h-16 w-24 object-cover rounded'>
-                            </td>
-                            <td class='p-3 border border-gray-300 dark:border-gray-600'>{$row['judul']}</td>
-                            <td class='p-3 border border-gray-300 dark:border-gray-600 max-w-xs truncate'>{$row['deskripsi']}</td>
-                            <td class='p-3 border border-gray-300 dark:border-gray-600 flex space-x-2'>
-                                <a href='edit_informasi.php?id_info={$row['id_info']}' class='bg-primary text-white px-3 py-1 rounded-lg hover:opacity-80'>Edit</a>
-                                <button onclick='confirmDelete({$row['id_info']})' class='bg-red-500 text-white px-3 py-1 rounded-lg hover:opacity-80'>Hapus</button>
-                            </td>
-                        </tr>";
-                        }
-                        ?>
-                    </tbody>
-                </table>
+        <!-- KONTEN -->
+        <div class="ml-64 pt-20 px-6 pb-10 transition-all duration-300">
+            <div class="bg-white p-6 rounded-lg shadow-lg dark:bg-slate-800">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-xl font-semibold text-dark dark:text-white">Daftar Informasi</h3>
+                    <a href="tambah_informasi.php"
+                        class="bg-primary text-white px-4 py-2 rounded-lg hover:opacity-80">Tambah Informasi</a>
+                </div>
+
+                <div class="overflow-x-auto">
+                    <h3 class="pb-3 text-xl font-medium md:text-lg text-dark dark:text-white">
+                        Halaman ini digunakan untuk mengelola informasi yang ditampilkan pada website.
+                    </h3>
+                    <table class="w-full border-collapse border border-gray-200 dark:border-gray-700">
+                        <thead>
+                            <tr class="bg-gray-100 dark:bg-gray-700 text-left">
+                                <th class="p-3 border border-gray-300 dark:border-gray-600">Gambar</th>
+                                <th class="p-3 border border-gray-300 dark:border-gray-600">Judul</th>
+                                <th class="p-3 border border-gray-300 dark:border-gray-600">Deskripsi</th>
+                                <th class="p-3 border border-gray-300 dark:border-gray-600">Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            $result = mysqli_query($mysqli, "SELECT * FROM informasi ORDER BY id_info DESC");
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                echo "<tr>
+                                <td class='p-3 border border-gray-300 dark:border-gray-600'>
+                                    <img src='../uploads/{$row['gambar']}' alt='Informasi' class='h-16 w-24 object-cover rounded'>
+                                </td>
+                                <td class='p-3 border border-gray-300 dark:border-gray-600'>{$row['judul']}</td>
+                                <td class='p-3 border border-gray-300 dark:border-gray-600 max-w-xs truncate'>{$row['deskripsi']}</td>
+                                <td class='p-3 border border-gray-300 dark:border-gray-600 flex space-x-2'>
+                                    <a href='edit_informasi.php?id_info={$row['id_info']}' class='bg-primary text-white px-3 py-1 rounded-lg hover:opacity-80'>Edit</a>
+                                    <button onclick='confirmDelete({$row['id_info']})' class='bg-red-500 text-white px-3 py-1 rounded-lg hover:opacity-80'>Hapus</button>
+                                </td>
+                            </tr>";
+                            }
+                            ?>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
-        <footer class="text-dark p-4 text-center bottom-0">
-            &copy; 2025 Pondok Pesantren Al-Muflihin | Gebang Ilir, Gebang, Cirebon Jawa Barat.
+
+        <!-- FOOTER -->
+        <footer class="bg-white text-gray-700 p-4 text-center w-full border-t dark:text-white dark:bg-gray-900">
+            &copy; 2025 Pondok Pesantren Al-Muflihin | Gebang Ilir, Gebang, Cirebon, Jawa Barat.
         </footer>
+
     </section>
 
-    <!-- Modal Konfirmasi Hapus -->
+    <!-- MODAL KONFIRMASI -->
     <div id="deleteModal"
         class="fixed inset-0 z-50 hidden items-center justify-center bg-black bg-opacity-50 transition-opacity">
         <div class="bg-white rounded-lg shadow-lg p-6 w-full max-w-md text-center">
@@ -91,17 +100,18 @@ $showSuccess = isset($_GET['status']) && $_GET['status'] === 'hapus_sukses';
         </div>
     </div>
 
-    <!-- Modal Berhasil Hapus -->
+    <!-- MODAL SUKSES -->
     <div id="successModal"
         class="fixed inset-0 z-50 hidden items-center justify-center bg-black bg-opacity-50 transition-opacity">
         <div class="bg-white rounded-lg shadow-lg p-6 w-full max-w-md text-center">
-            <h2 class="text-xl font-semibold text-dark mb-4">Berhasil</h2>
+            <h2 class="text-xl font-semibold text-green-600 mb-4">Berhasil</h2>
             <p>Informasi berhasil dihapus.</p>
             <button onclick="closeSuccessModal()"
-                class="mt-4 bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">Tutup</button>
+                class="mt-4 bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">Tutup</button>
         </div>
     </div>
 
+    <!-- SCRIPT -->
     <script>
         function confirmDelete(id) {
             const modal = document.getElementById('deleteModal');
@@ -121,13 +131,12 @@ $showSuccess = isset($_GET['status']) && $_GET['status'] === 'hapus_sukses';
             const modal = document.getElementById('successModal');
             modal.classList.remove('flex');
             modal.classList.add('hidden');
-
-            // Hapus parameter success dari URL agar modal tidak muncul lagi saat reload
             const url = new URL(window.location);
             url.searchParams.delete('success');
             window.history.replaceState({}, document.title, url.toString());
         }
 
+        // Tampilkan modal jika sukses
         window.onload = function () {
             <?php if ($showSuccess): ?>
                 const successModal = document.getElementById('successModal');
@@ -135,8 +144,26 @@ $showSuccess = isset($_GET['status']) && $_GET['status'] === 'hapus_sukses';
                 successModal.classList.add('flex');
             <?php endif; ?>
         };
+
+        // Script toggle sidebar
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const headers = document.querySelectorAll('header');
+            const contents = document.querySelectorAll('section > div');
+
+            if (sidebar.classList.contains('-ml-64')) {
+                sidebar.classList.remove('-ml-64');
+                headers.forEach(h => h.classList.add('ml-64'));
+                contents.forEach(c => c.classList.add('ml-64'));
+            } else {
+                sidebar.classList.add('-ml-64');
+                headers.forEach(h => h.classList.remove('ml-64'));
+                contents.forEach(c => c.classList.remove('ml-64'));
+            }
+        }
     </script>
 
 </body>
+
 
 </html>

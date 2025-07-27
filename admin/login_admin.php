@@ -1,4 +1,5 @@
 <?php
+session_start(); // <-- tambahkan ini kalau belum ada
 include('../header.php');
 ?>
 
@@ -63,6 +64,12 @@ include('../header.php');
 
                 <!-- Form Login -->
                 <div class="w-full md:w-1/2 p-3 mb-16 px-5 fade-in-up">
+                    <?php
+                    if (isset($_SESSION['error'])) {
+                        echo '<div class="mb-4 p-3 bg-red-100 text-red-700 rounded text-center">' . $_SESSION['error'] . '</div>';
+                        unset($_SESSION['error']);
+                    }
+                    ?>
                     <form method="POST" action="cek_login_admin.php" class="space-y-6">
                         <h1 class="text-dark dark:text-white text-3xl font-bold mb-8">Halaman Login Admin</h1>
                         <div>

@@ -45,7 +45,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($stmt->execute()) {
         $_SESSION['success'] = "Registrasi admin berhasil! Silakan login.";
-        header("Location: ../login.php");
+        header("Location: login_admin.php"); // diarahkan ke login_admin.php
         exit();
     } else {
         $_SESSION['error'] = "Terjadi kesalahan saat registrasi.";

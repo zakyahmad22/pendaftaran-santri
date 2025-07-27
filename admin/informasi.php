@@ -28,7 +28,7 @@ include '../config.php';
     <!-- Blog Section Start -->
     <section id="informasi" class="bg-slate-100 pt-36 pb-32 dark:bg-dark">
         <!-- Page Title -->
-        <div class="bg-gray-100 dark:bg-dark py-16">
+        <div class="bg-gray-100 dark:bg-dark">
             <div class="container mx-auto px-4 max-w-3xl lg:max-w-5xl">
                 <div class="breadcrumbs text-secondary dark:text-white pb-3">
                     <ol class="flex space-x-2 text-sm px-4 pb-5">

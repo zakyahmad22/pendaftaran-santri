@@ -81,11 +81,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo "<script>alert('Gagal memperbarui data!');</script>";
     }
 }
-?>
+include 'sidebar.php';
 
-<?php
-include '../config.php';
-include '../sidebar.php';
 ?>
 
 <!DOCTYPE html>
@@ -100,10 +97,11 @@ include '../sidebar.php';
 
 </head>
 
-<body>
+<body class="bg-gray-100">
 
-    <section id="informasi_admin" class="bg-slate-100 w-full dark:bg-dark">
-        <header class="bg-white shadow p-4 flex justify-between items-center">
+    <section id="edit_santri" class="bg-slate-100 w-full dark:bg-dark">
+
+        <header class="fixed top-0 left-0 right-0 z-40 bg-white shadow p-4 flex justify-between items-center ml-64">
             <button onclick="toggleSidebar()" class="text-gray-500 focus:outline-none">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                     xmlns="http://www.w3.org/2000/svg">
@@ -115,163 +113,191 @@ include '../sidebar.php';
             <h3 class="text-md font-medium text-secondary md:text-lg"></h3>
         </header>
 
-        <div class="mt-8 bg-white p-6 rounded-lg shadow-lg dark:bg-slate-800">
-            <h2 class="text-2xl font-bold text-gray-700 mb-4">Data Santri</h2>
-            <form method="POST">
-                <div class="mb-4">
-                    <label class="block text-sm font-medium text-gray-700">Tanggal Pendaftaran</label>
-                    <input type="date" name="tanggal_pendaftaran" value="<?php echo $row['tanggal_pendaftaran']; ?>"
-                        required class="w-full p-2 border rounded">
-                </div>
-                <div class="mb-4">
-                    <label class="block text-sm font-medium text-gray-700">Nama Lengkap</label>
-                    <input type="text" name="nama_lengkap" value="<?php echo $row['nama_lengkap']; ?>" required
-                        class="w-full p-2 border rounded">
-                </div>
-                <div class="mb-4">
-                    <label class="block text-sm font-medium text-gray-700">Tempat Lahir</label>
-                    <input type="text" name="tempat_lahir" value="<?php echo $row['tempat_lahir']; ?>" required
-                        class="w-full p-2 border rounded">
-                </div>
-                <div class="mb-4">
-                    <label class="block text-sm font-medium text-gray-700">Tanggal Lahir</label>
-                    <input type="date" name="tanggal_lahir" value="<?php echo $row['tanggal_lahir']; ?>" required
-                        class="w-full p-2 border rounded">
-                </div>
-                <div class="mb-4">
-                    <label class="block text-sm font-medium text-gray-700">Alamat Lengkap</label>
-                    <input type="text" name="alamat_lengkap" value="<?php echo $row['alamat_lengkap']; ?>" required
-                        class="w-full p-2 border rounded">
-                </div>
-                <div class="mb-4">
-                    <label class="block text-sm font-medium text-gray-700">Tinggal Bersama</label>
-                    <select name="tinggal_bersama" required class="w-full p-2 border rounded">
-                        <option value="Ayah dan Ibu" <?php if ($row['tinggal_bersama'] == "Ayah dan Ibu")
-                            echo "selected"; ?>>
-                            Ayah dan Ibu</option>
-                        <option value="Ayah" <?php if ($row['tinggal_bersama'] == "Ayah")
-                            echo "selected"; ?>>Ayah</option>
-                        <option value="Ibu" <?php if ($row['tinggal_bersama'] == "Ibu")
-                            echo "selected"; ?>>Ibu</option>
-                        <option value="Sendiri" <?php if ($row['tinggal_bersama'] == "Sendiri")
-                            echo "selected"; ?>>Sendiri
-                        </option>
-                    </select>
-                </div>
-                <div class="mb-4">
-                    <label class="block text-sm font-medium text-gray-700">Jenis Kelamin</label>
-                    <select name="jenis_kelamin" required class="w-full p-2 border rounded">
-                        <option value="Laki-laki" <?php if ($row['jenis_kelamin'] == "Laki-laki")
-                            echo "selected"; ?>>
-                            Laki-laki</option>
-                        <option value="Perempuan" <?php if ($row['jenis_kelamin'] == "Perempuan")
-                            echo "selected"; ?>>
-                            Perempuan</option>
-                    </select>
-                </div>
-                <div class="mb-4">
-                    <label class="block text-sm font-medium text-gray-700">Sekolah Terakhir</label>
-                    <input type="text" name="sekolah_terakhir" value="<?php echo $row['sekolah_terakhir']; ?>" required
-                        class="w-full p-2 border rounded">
-                </div>
-                <div class="mb-4">
-                    <label class="block text-sm font-medium text-gray-700">Pernah Mondok?</label>
-                    <select name="pernah_mondok" required class="w-full p-2 border rounded">
-                        <option value="Ya" <?php if ($row['pernah_mondok'] == "Ya")
-                            echo "selected"; ?>>Ya</option>
-                        <option value="Tidak" <?php if ($row['pernah_mondok'] == "Tidak")
-                            echo "selected"; ?>>Tidak</option>
-                    </select>
-                </div>
-                <div class="mb-4">
-                    <label class="block text-sm font-medium text-gray-700">Nama Pondok Sebelumnya</label>
-                    <input type="text" name="nama_pondok_sebelumnya"
-                        value="<?php echo $row['nama_pondok_sebelumnya']; ?>" class="w-full p-2 border rounded">
-                </div>
-                <div class="mb-4">
-                    <label class="block text-sm font-medium text-gray-700">Alamat Pondok Sebelumnya</label>
-                    <input type="text" name="alamat_pondok_sebelumnya"
-                        value="<?php echo $row['alamat_pondok_sebelumnya']; ?>" class="w-full p-2 border rounded">
-                </div>
-                <div class="mb-4">
-                    <label class="block text-sm font-medium text-gray-700">Nama Ayah</label>
-                    <input type="text" name="nama_ayah" value="<?php echo $row['nama_ayah']; ?>" required
-                        class="w-full p-2 border rounded">
-                </div>
-                <div class="mb-4">
-                    <label class="block text-sm font-medium text-gray-700">Nama Ibu</label>
-                    <input type="text" name="nama_ibu" value="<?php echo $row['nama_ibu']; ?>" required
-                        class="w-full p-2 border rounded">
-                </div>
-                <div class="mb-4">
-                    <label class="block text-sm font-medium text-gray-700">Tempat Lahir Ayah</label>
-                    <input type="text" name="tempat_lahir_ayah" value="<?php echo $row['tempat_lahir_ayah']; ?>" required
-                        class="w-full p-2 border rounded">
-                </div>
-                <div class="mb-4">
-                    <label class="block text-sm font-medium text-gray-700">Tanggal Lahir Ayah</label>
-                    <input type="date" name="tanggal_lahir_ayah" value="<?php echo $row['tanggal_lahir_ayah']; ?>" required
-                        class="w-full p-2 border rounded">
-                </div>
-                <div class="mb-4">
-                    <label class="block text-sm font-medium text-gray-700">Tempat Lahir Ibu</label>
-                    <input type="text" name="tempat_lahir_ibu" value="<?php echo $row['tempat_lahir_ibu']; ?>" required
-                        class="w-full p-2 border rounded">
-                </div>
-                <div class="mb-4">
-                    <label class="block text-sm font-medium text-gray-700">Tanggal Lahir Ibu</label>
-                    <input type="date" name="tanggal_lahir_ibu" value="<?php echo $row['tanggal_lahir_ibu']; ?>" required
-                        class="w-full p-2 border rounded">
-                </div>
-                <div class="mb-4">
-                    <label class="block text-sm font-medium text-gray-700">Pekerjaan Ayah</label>
-                    <input type="text" name="pekerjaan_ayah" value="<?php echo $row['pekerjaan_ayah']; ?>" required
-                        class="w-full p-2 border rounded">
-                </div>
-                <div class="mb-4">
-                    <label class="block text-sm font-medium text-gray-700">Pekerjaan Ibu</label>
-                    <input type="text" name="pekerjaan_ibu" value="<?php echo $row['pekerjaan_ibu']; ?>" required
-                        class="w-full p-2 border rounded">
-                </div>
-                <div class="mb-4">
-                    <label class="block text-sm font-medium text-gray-700">Penghasilan Ayah</label>
-                    <input type="text" name="penghasilan_ayah" value="<?php echo $row['penghasilan_ayah']; ?>" required
-                        class="w-full p-2 border rounded">
-                </div>
-                <div class="mb-4">
-                    <label class="block text-sm font-medium text-gray-700">Penghasilan Ibu</label>
-                    <input type="text" name="penghasilan_ibu" value="<?php echo $row['penghasilan_ibu']; ?>" required
-                        class="w-full p-2 border rounded">
-                </div>
-                <div class="mb-4">
-                    <label class="block text-sm font-medium text-gray-700">Alamat Rumah</label>
-                    <input type="text" name="alamat_rumah" value="<?php echo $row['alamat_rumah']; ?>" required
-                        class="w-full p-2 border rounded">
-                </div>
-                <div class="mb-4">
-                    <label class="block text-sm font-medium text-gray-700">No HP Orang Tua</label>
-                    <input type="text" name="no_hp_ortu" value="<?php echo $row['no_hp_ortu']; ?>" required
-                        class="w-full p-2 border rounded">
-                </div>
+        <div class="ml-64 pt-20 p-6">
+            
+                <div class="bg-white p-6 rounded-lg shadow-lg dark:bg-slate-800">
+                    <h2 class="text-2xl font-bold text-gray-700 mb-4">Data Santri</h2>
+                    <form method="POST">
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium text-gray-700">Tanggal Pendaftaran</label>
+                            <input type="date" name="tanggal_pendaftaran"
+                                value="<?php echo $row['tanggal_pendaftaran']; ?>" required
+                                class="w-full p-2 border rounded">
+                        </div>
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium text-gray-700">Nama Lengkap</label>
+                            <input type="text" name="nama_lengkap" value="<?php echo $row['nama_lengkap']; ?>" required
+                                class="w-full p-2 border rounded">
+                        </div>
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium text-gray-700">Tempat Lahir</label>
+                            <input type="text" name="tempat_lahir" value="<?php echo $row['tempat_lahir']; ?>" required
+                                class="w-full p-2 border rounded">
+                        </div>
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium text-gray-700">Tanggal Lahir</label>
+                            <input type="date" name="tanggal_lahir" value="<?php echo $row['tanggal_lahir']; ?>"
+                                required class="w-full p-2 border rounded">
+                        </div>
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium text-gray-700">Alamat Lengkap</label>
+                            <input type="text" name="alamat_lengkap" value="<?php echo $row['alamat_lengkap']; ?>"
+                                required class="w-full p-2 border rounded">
+                        </div>
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium text-gray-700">Tinggal Bersama</label>
+                            <select name="tinggal_bersama" required class="w-full p-2 border rounded">
+                                <option value="Ayah dan Ibu" <?php if ($row['tinggal_bersama'] == "Ayah dan Ibu")
+                                    echo "selected"; ?>>
+                                    Ayah dan Ibu</option>
+                                <option value="Ayah" <?php if ($row['tinggal_bersama'] == "Ayah")
+                                    echo "selected"; ?>>Ayah</option>
+                                <option value="Ibu" <?php if ($row['tinggal_bersama'] == "Ibu")
+                                    echo "selected"; ?>>Ibu</option>
+                                <option value="Sendiri" <?php if ($row['tinggal_bersama'] == "Sendiri")
+                                    echo "selected"; ?>>Sendiri
+                                </option>
+                            </select>
+                        </div>
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium text-gray-700">Jenis Kelamin</label>
+                            <select name="jenis_kelamin" required class="w-full p-2 border rounded">
+                                <option value="Laki-laki" <?php if ($row['jenis_kelamin'] == "Laki-laki")
+                                    echo "selected"; ?>>
+                                    Laki-laki</option>
+                                <option value="Perempuan" <?php if ($row['jenis_kelamin'] == "Perempuan")
+                                    echo "selected"; ?>>
+                                    Perempuan</option>
+                            </select>
+                        </div>
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium text-gray-700">Sekolah Terakhir</label>
+                            <input type="text" name="sekolah_terakhir" value="<?php echo $row['sekolah_terakhir']; ?>"
+                                required class="w-full p-2 border rounded">
+                        </div>
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium text-gray-700">Pernah Mondok?</label>
+                            <select name="pernah_mondok" required class="w-full p-2 border rounded">
+                                <option value="Ya" <?php if ($row['pernah_mondok'] == "Ya")
+                                    echo "selected"; ?>>Ya</option>
+                                <option value="Tidak" <?php if ($row['pernah_mondok'] == "Tidak")
+                                    echo "selected"; ?>>Tidak</option>
+                            </select>
+                        </div>
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium text-gray-700">Nama Pondok Sebelumnya</label>
+                            <input type="text" name="nama_pondok_sebelumnya"
+                                value="<?php echo $row['nama_pondok_sebelumnya']; ?>" class="w-full p-2 border rounded">
+                        </div>
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium text-gray-700">Alamat Pondok Sebelumnya</label>
+                            <input type="text" name="alamat_pondok_sebelumnya"
+                                value="<?php echo $row['alamat_pondok_sebelumnya']; ?>"
+                                class="w-full p-2 border rounded">
+                        </div>
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium text-gray-700">Nama Ayah</label>
+                            <input type="text" name="nama_ayah" value="<?php echo $row['nama_ayah']; ?>" required
+                                class="w-full p-2 border rounded">
+                        </div>
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium text-gray-700">Nama Ibu</label>
+                            <input type="text" name="nama_ibu" value="<?php echo $row['nama_ibu']; ?>" required
+                                class="w-full p-2 border rounded">
+                        </div>
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium text-gray-700">Tempat Lahir Ayah</label>
+                            <input type="text" name="tempat_lahir_ayah" value="<?php echo $row['tempat_lahir_ayah']; ?>"
+                                required class="w-full p-2 border rounded">
+                        </div>
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium text-gray-700">Tanggal Lahir Ayah</label>
+                            <input type="date" name="tanggal_lahir_ayah"
+                                value="<?php echo $row['tanggal_lahir_ayah']; ?>" required
+                                class="w-full p-2 border rounded">
+                        </div>
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium text-gray-700">Tempat Lahir Ibu</label>
+                            <input type="text" name="tempat_lahir_ibu" value="<?php echo $row['tempat_lahir_ibu']; ?>"
+                                required class="w-full p-2 border rounded">
+                        </div>
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium text-gray-700">Tanggal Lahir Ibu</label>
+                            <input type="date" name="tanggal_lahir_ibu" value="<?php echo $row['tanggal_lahir_ibu']; ?>"
+                                required class="w-full p-2 border rounded">
+                        </div>
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium text-gray-700">Pekerjaan Ayah</label>
+                            <input type="text" name="pekerjaan_ayah" value="<?php echo $row['pekerjaan_ayah']; ?>"
+                                required class="w-full p-2 border rounded">
+                        </div>
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium text-gray-700">Pekerjaan Ibu</label>
+                            <input type="text" name="pekerjaan_ibu" value="<?php echo $row['pekerjaan_ibu']; ?>"
+                                required class="w-full p-2 border rounded">
+                        </div>
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium text-gray-700">Penghasilan Ayah</label>
+                            <input type="text" name="penghasilan_ayah" value="<?php echo $row['penghasilan_ayah']; ?>"
+                                required class="w-full p-2 border rounded">
+                        </div>
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium text-gray-700">Penghasilan Ibu</label>
+                            <input type="text" name="penghasilan_ibu" value="<?php echo $row['penghasilan_ibu']; ?>"
+                                required class="w-full p-2 border rounded">
+                        </div>
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium text-gray-700">Alamat Rumah</label>
+                            <input type="text" name="alamat_rumah" value="<?php echo $row['alamat_rumah']; ?>" required
+                                class="w-full p-2 border rounded">
+                        </div>
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium text-gray-700">No HP Orang Tua</label>
+                            <input type="text" name="no_hp_ortu" value="<?php echo $row['no_hp_ortu']; ?>" required
+                                class="w-full p-2 border rounded">
+                        </div>
 
-                <div class="text-center">
-                    <button type="submit" class="bg-primary text-white px-4 py-2 rounded-lg hover:opacity-80">Simpan
-                        Perubahan</button>
-                </div>
-                <div class="flex gap-2 mt-4">
-                    <a href="export_santri_pdf.php?id=<?php echo $id; ?>" target="_blank"
-                        class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600">
-                        Cetak PDF
-                    </a>
-                    <a href="export_santri_excel.php?id=<?php echo $id; ?>" target="_blank"
-                        class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600">
-                        Cetak Excel
-                    </a>
-                </div>
+                        <div class="text-center">
+                            <button type="submit"
+                                class="bg-primary text-white px-4 py-2 rounded-lg hover:opacity-80">Simpan
+                                Perubahan</button>
+                        </div>
+                        <div class="flex gap-2 mt-4">
+                            <a href="export_santri_pdf.php?id=<?php echo $id; ?>" target="_blank"
+                                class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600">
+                                Cetak PDF
+                            </a>
+                            <a href="export_santri_excel.php?id=<?php echo $id; ?>" target="_blank"
+                                class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600">
+                                Cetak Excel
+                            </a>
+                        </div>
 
-            </form>
-        </div>
+                    </form>
+                </div>
+            
     </section>
+    </section>
+
+    <!-- Script Sidebar Toggle -->
+    <script>
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const headers = document.querySelectorAll('header');
+            const contents = document.querySelectorAll('section > div');
+
+            if (sidebar.classList.contains('-ml-64')) {
+                sidebar.classList.remove('-ml-64');
+                headers.forEach(h => h.classList.add('ml-64'));
+                contents.forEach(c => c.classList.add('ml-64'));
+            } else {
+                sidebar.classList.add('-ml-64');
+                headers.forEach(h => h.classList.remove('ml-64'));
+                contents.forEach(c => c.classList.remove('ml-64'));
+            }
+        }
+    </script>
+
 </body>
 
 </html>

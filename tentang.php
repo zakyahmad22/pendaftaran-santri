@@ -48,96 +48,123 @@ if ($jenis) {
     }
 </style>
 
-<section id="about" class="pt-36 pb-32 dark:bg-dark">
-    <!-- Page Title -->
-    <div class="container bg-gray-100 dark:bg-dark py-16 reveal">
-        <div class="container mx-auto px-4 max-w-3xl lg:max-w-5xl">
-            <div class="breadcrumbs text-secondary dark:text-white pb-5">
-                <ol class="flex space-x-2 text-sm px-4">
-                    <li><a href="index.php" class="hover:text-primary">Beranda |</a></li>
-                    <li class="current text-primary">Tentang</li>
-                </ol>
+<body>
+
+    <!-- Section Tentang Pondok -->
+    <section id="about" class="bg-slate-100 pt-36 pb-32 dark:bg-dark">
+        <!-- Page Title -->
+        <div class="bg-gray-100 dark:bg-dark">
+            <div class="container mx-auto px-4 max-w-3xl lg:max-w-5xl">
+                <div class="breadcrumbs text-secondary dark:text-white pb-3">
+                    <ol class="flex space-x-2 text-sm px-4 pb-5">
+                        <li><a href="../index.php" class="hover:text-primary">Beranda |</a></li>
+                        <li class="current text-primary">Tentang Pondok</li>
+                    </ol>
+                </div>
             </div>
         </div>
-    </div>
-    <!-- End Page Title -->
-    <div class="container">
-        <?php if ($data->num_rows === 0): ?>
-            <div class="text-center text-gray-600 text-xl">Tidak ada data untuk jenis "<?= htmlspecialchars($jenis) ?>"
-            </div>
-        <?php endif; ?>
+        <!-- End Page Title -->
 
-        <?php foreach ($data as $row): ?>
-            <div
-                class="container mx-auto flex flex-wrap items-center <?= ($row['jenis'] === 'visi_misi') ? 'reveal' : '' ?>">
-                <?php if ($row['jenis'] === 'visi_misi'): ?>
-                    <!-- Gambar Kiri -->
-                    <div class="w-full px-4 lg:w-1/2 reveal-left">
-                        <img src="dist/img/<?= htmlspecialchars($row['gambar']) ?>" alt="Gambar <?= $row['judul'] ?>"
-                            class="mx-auto max-w-full rounded-lg shadow-lg">
-                    </div>
-                    <!-- Teks Kanan -->
-                    <div class="mt-10 mb-10 w-full px-4 lg:w-1/2">
-                    <?php else: ?>
-                        <!-- Teks Kiri -->
-                        <div class="mb-10 mt-10 w-full px-4 lg:w-1/2 reveal">
-                        <?php endif; ?>
-                        <h4 class="mb-3 text-lg font-bold uppercase text-primary"><?= htmlspecialchars($row['sub_judul']) ?>
-                        </h4>
-                        <h2 class="mb-5 text-3xl font-bold text-dark dark:text-white lg:text-4xl">
-                            <?= nl2br(htmlspecialchars($row['judul'])) ?>
-                        </h2>
-                        <p class="mb-4 text-base font-medium text-secondary lg:text-lg text-justify">
-                            <?= substr(strip_tags($row['deskripsi']), 0, 150) ?>...
-                        </p>
-                        <?php if (!$jenis): ?>
-                            <div class="mt-6">
+        <div class="container max-w-5xl mx-auto px-4">
+            <?php if ($data->num_rows === 0): ?>
+                <div class="text-center text-gray-600 text-xl">Tidak ada data untuk jenis "<?= htmlspecialchars($jenis) ?>"
+                </div>
+            <?php endif; ?>
+
+            <?php foreach ($data as $row): ?>
+                <div
+                    class="tentang-step opacity-0 translate-y-10 transition-all duration-700 bg-white dark:bg-slate-800 rounded-lg shadow-lg p-8 mb-10 hover:scale-105 hover:shadow-xl flex flex-col lg:flex-row items-center gap-8">
+
+                    <?php if ($row['jenis'] === 'visi_misi'): ?>
+                        <!-- Gambar Kiri -->
+                        <div class="w-full lg:w-1/2">
+                            <img src="dist/img/<?= htmlspecialchars($row['gambar']) ?>" alt="Gambar <?= $row['judul'] ?>"
+                                class="w-full h-auto max-w-full rounded-lg shadow-md">
+                        </div>
+                        <!-- Teks Kanan -->
+                        <div class="w-full lg:w-1/2">
+                        <?php else: ?>
+                            <!-- Teks Kiri -->
+                            <div class="w-full lg:w-1/2">
+                            <?php endif; ?>
+
+                            <h4 class="mb-2 text-lg font-bold uppercase text-primary">
+                                <?= htmlspecialchars($row['sub_judul']) ?>
+                            </h4>
+                            <h2 class="mb-4 text-2xl font-bold text-dark dark:text-white">
+                                <?= nl2br(htmlspecialchars($row['judul'])) ?>
+                            </h2>
+                            <p class="text-base text-secondary dark:text-gray-300 leading-relaxed text-justify mb-4">
+                                <?= substr(strip_tags($row['deskripsi']), 0, 150) ?>...
+                            </p>
+                            <?php if (!$jenis): ?>
                                 <a href="tentang_detail.php?jenis=<?= urlencode($row['jenis']) ?>"
-                                    class="rounded-lg bg-primary py-3 px-8 text-base font-semibold text-white transition duration-300 ease-in-out hover:opacity-80 hover:shadow-lg">
+                                    class="inline-block mt-4 rounded-lg bg-primary py-2 px-6 text-base font-semibold text-white transition duration-300 ease-in-out hover:opacity-80 hover:shadow-lg">
                                     Baca Selengkapnya
                                 </a>
+                            <?php endif; ?>
+                        </div>
+
+                        <?php if ($row['jenis'] !== 'visi_misi'): ?>
+                            <!-- Gambar Kanan -->
+                            <div class="w-full lg:w-1/2">
+                                <img src="dist/img/<?= htmlspecialchars($row['gambar']) ?>" alt="Gambar <?= $row['judul'] ?>"
+                                    class="w-full h-auto max-w-full rounded-lg shadow-md">
                             </div>
                         <?php endif; ?>
-
                     </div>
-                    <?php if ($row['jenis'] !== 'visi_misi'): ?>
-                        <!-- Gambar Kanan -->
-                        <div class="w-full px-4 lg:w-1/2 reveal-right">
-                            <img src="dist/img/<?= htmlspecialchars($row['gambar']) ?>" alt="Gambar <?= $row['judul'] ?>"
-                                class="mx-auto max-w-full rounded-lg shadow-lg">
-                        </div>
-                    <?php endif; ?>
-                </div>
-            <?php endforeach; ?>
-        </div>
-</section>
+                <?php endforeach; ?>
+            </div>
+    </section>
 
-<!-- Back to top Start -->
-<a href="#about"
-    class="fixed bottom-4 right-4 z-[9999] hidden h-14 w-14 items-center justify-center rounded-full bg-primary p-4 hover:animate-pulse"
-    id="to-top">
-    <span class="mt-2 block h-5 w-5 rotate-45 border-t-2 border-l-2"></span>
-</a>
-<!-- Back to top End -->
+    <!-- Animasi Masuk -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const steps = document.querySelectorAll('.tentang-step');
 
-<script src="dist/js/script.js"></script>
-<script>
-    function revealElements() {
-        const reveals = document.querySelectorAll('.reveal, .reveal-right, .reveal-left');
-
-        reveals.forEach(el => {
-            const windowHeight = window.innerHeight;
-            const elementTop = el.getBoundingClientRect().top;
-            const revealPoint = 100;
-
-            if (elementTop < windowHeight - revealPoint) {
-                el.classList.add('active');
-            }
+            steps.forEach((step, index) => {
+                setTimeout(() => {
+                    step.classList.remove('opacity-0', 'translate-y-10');
+                    step.classList.add('opacity-100', 'translate-y-0');
+                }, 300 + index * 200);
+            });
         });
-    }
+    </script>
 
-    window.addEventListener('scroll', revealElements);
-    window.addEventListener('load', revealElements);
-</script>
+    <script src="../dist/js/script.js"></script>
 
-<?php include 'footer.php'; ?>
+
+
+
+    <!-- Back to top Start -->
+    <a href="#about"
+        class="fixed bottom-4 right-4 z-[9999] hidden h-14 w-14 items-center justify-center rounded-full bg-primary p-4 hover:animate-pulse"
+        id="to-top">
+        <span class="mt-2 block h-5 w-5 rotate-45 border-t-2 border-l-2"></span>
+    </a>
+    <!-- Back to top End -->
+
+    <script src="dist/js/script.js"></script>
+    <script>
+        function revealElements() {
+            const reveals = document.querySelectorAll('.reveal, .reveal-right, .reveal-left');
+
+            reveals.forEach(el => {
+                const windowHeight = window.innerHeight;
+                const elementTop = el.getBoundingClientRect().top;
+                const revealPoint = 100;
+
+                if (elementTop < windowHeight - revealPoint) {
+                    el.classList.add('active');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', revealElements);
+        window.addEventListener('load', revealElements);
+    </script>
+
+    <?php include 'footer.php'; ?>
+</body>
+
+</html>

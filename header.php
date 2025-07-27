@@ -8,8 +8,8 @@
     <title>Pendaftaran Santri Baru</title>
     <link href="dist/css/final.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="icon" href="dist/img/logo.png" type="image/icon">
-
+    <link rel="icon" href="/pendaftaran-santri/dist/img/logo.png" type="image/png">
+    <script src="https://cdn.tailwindcss.com"></script>
     <script>
         if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
             document.documentElement.classList.add('dark');
@@ -45,15 +45,145 @@
                                 <a href="/pendaftaran-santri/index.php"
                                     class="mx-8 flex py-2 text-base text-dark group-hover:text-primary dark:text-white">Beranda</a>
                             </li>
-                            <li class="group">
-                                <a href="/pendaftaran-santri/tentang.php"
-                                    class="mx-8 flex py-2 text-base text-dark group-hover:text-primary dark:text-white">Tentang</a>
+                            <!-- dropdown profile start -->
+                            <li class="relative">
+                                <button id="profileDropdownBtn"
+                                    class="mx-8 flex py-2 text-base text-dark group-hover:text-primary dark:text-white z-50">
+                                    Profile
+                                    <svg class="w-4 h-4 ml-1 mt-1" xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd"
+                                            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                            clip-rule="evenodd" />
+                                    </svg>
+                                </button>
+
+                                <!-- Dropdown Menu -->
+                                <ul id="profileDropdown"
+                                    class="absolute left-0 right-0 mt-2 hidden w-56 rounded-md bg-white shadow-lg opacity-0 transition-opacity duration-300 z-50 dark:bg-dark">
+                                    <li class="group">
+                                        <a href="/pendaftaran-santri/tentang.php"
+                                            class="mx-8 flex py-2 text-base text-dark group-hover:text-primary dark:text-white">
+                                            Tentang Pondok
+                                        </a>
+                                    </li>
+                                    <li class="group">
+                                        <a href="/pendaftaran-santri/admin/pengasuh.php"
+                                            class="mx-8 flex py-2 text-base text-dark group-hover:text-primary dark:text-white">
+                                            Pengasuh Pondok
+                                        </a>
+                                    </li>
+                                    <li class="group">
+                                        <a href="/pendaftaran-santri/admin/struktur_organisasi.php"
+                                            class="mx-8 flex py-2 text-base text-dark group-hover:text-primary dark:text-white">
+                                            Struktur Organisasi
+                                        </a>
+                                    </li>
+                                    <li class="group">
+                                        <a href="/pendaftaran-santri/admin/galeri.php"
+                                            class="mx-8 flex py-2 text-base text-dark group-hover:text-primary dark:text-white">
+                                            Galeri
+                                        </a>
+                                    </li>
+                                </ul>
                             </li>
-                            <li class="group">
-                                <a href="/pendaftaran-santri/form_pendaftaran.php"
-                                    class="mx-8 flex py-2 text-base text-dark group-hover:text-primary dark:text-white">Pendaftaran
-                                </a>
+
+                            <!-- JavaScript untuk Dropdown Profile -->
+                            <script>
+                                document.addEventListener("DOMContentLoaded", function () {
+                                    const profileBtn = document.getElementById("profileDropdownBtn");
+                                    const profileMenu = document.getElementById("profileDropdown");
+
+                                    profileBtn.addEventListener("click", function (event) {
+                                        event.stopPropagation();
+                                        profileMenu.classList.toggle("hidden");
+                                        profileMenu.classList.toggle("opacity-0");
+                                    });
+
+                                    document.addEventListener("click", function (event) {
+                                        if (!profileBtn.contains(event.target) && !profileMenu.contains(event.target)) {
+                                            profileMenu.classList.add("hidden");
+                                            profileMenu.classList.add("opacity-0");
+                                        }
+                                    });
+                                });
+                            </script>
+                            <!-- dropdown profile end -->
+
+                            <!-- dropdown pendaftaran start -->
+                            <li class="relative">
+                                <button id="pendaftaranDropdownBtn"
+                                    class="mx-8 flex py-2 text-base text-dark group-hover:text-primary dark:text-white z-50">
+                                    Pendaftaran
+                                    <svg class="w-4 h-4 ml-1 mt-1" xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd"
+                                            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                            clip-rule="evenodd" />
+                                    </svg>
+                                </button>
+
+                                <!-- Dropdown Menu -->
+                                <ul id="pendaftaranDropdown"
+                                    class="absolute left-0 right-0 mt-2 hidden w-60 rounded-md bg-white shadow-lg opacity-0 transition-opacity duration-300 z-50 dark:bg-dark">
+                                    <li class="group">
+                                        <a href="/pendaftaran-santri/admin/pendaftaran_info.php"
+                                            class="mx-8 flex py-2 text-base text-dark group-hover:text-primary dark:text-white">
+                                            Syarat Pendaftaran
+                                        </a>
+                                    </li>
+                                    <li class="group">
+                                        <a href="/pendaftaran-santri/admin/alur_pendaftaran.php"
+                                            class="mx-8 flex py-2 text-base text-dark group-hover:text-primary dark:text-white">
+                                            Alur Pendaftaran
+                                        </a>
+                                    </li>
+                                    <li class="group">
+                                        <a href="/pendaftaran-santri/admin/biaya_pendaftaran_smp.php"
+                                            class="mx-8 flex py-2 text-base text-dark group-hover:text-primary dark:text-white">
+                                            Biaya Pendaftaran SMP
+                                        </a>
+                                    </li>
+                                    <li class="group">
+                                        <a href="/pendaftaran-santri/admin/biaya_pendaftaran_ma.php"
+                                            class="mx-8 flex py-2 text-base text-dark group-hover:text-primary dark:text-white">
+                                            Biaya Pendaftaran MA
+                                        </a>
+                                    </li>
+                                    <li class="group">
+                                        <a href="/pendaftaran-santri/admin/jadwal_pendaftaran.php"
+                                            class="mx-8 flex py-2 text-base text-dark group-hover:text-primary dark:text-white">
+                                            Jadwal Pendaftaran
+                                        </a>
+                                    </li>
+                                </ul>
                             </li>
+
+                            <!-- JavaScript untuk Dropdown -->
+                            <script>
+                                document.addEventListener("DOMContentLoaded", function () {
+                                    const pendaftaranBtn = document.getElementById("pendaftaranDropdownBtn");
+                                    const pendaftaranMenu = document.getElementById("pendaftaranDropdown");
+
+                                    // Toggle dropdown saat tombol diklik
+                                    pendaftaranBtn.addEventListener("click", function (event) {
+                                        event.stopPropagation(); // Mencegah bubbling
+                                        pendaftaranMenu.classList.toggle("hidden");
+                                        pendaftaranMenu.classList.toggle("opacity-0");
+                                    });
+
+                                    // Tutup dropdown jika klik di luar menu
+                                    document.addEventListener("click", function (event) {
+                                        if (!pendaftaranBtn.contains(event.target) && !pendaftaranMenu.contains(event.target)) {
+                                            pendaftaranMenu.classList.add("hidden");
+                                            pendaftaranMenu.classList.add("opacity-0");
+                                        }
+                                    });
+                                });
+                            </script>
+                            <!-- dropdown pendaftaran end -->
+
+
                             <li class="group">
                                 <a href="/pendaftaran-santri/admin/informasi.php"
                                     class="mx-8 flex py-2 text-base text-dark group-hover:text-primary dark:text-white">Informasi

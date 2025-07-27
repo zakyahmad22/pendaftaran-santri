@@ -1,22 +1,22 @@
 <?php
-include '../config.php'; // Sudah benar, config ini mendefinisikan $mysqli
-include '../sidebar.php'; // Sudah benar, ini untuk sidebar admin
+include '../config.php';
+include 'sidebar.php';
 
 // Ambil data dari tabel pendaftaran_section
 $result = $mysqli->query("SELECT * FROM pendaftaran_section LIMIT 1");
 $data = $result->fetch_assoc();
 
 if (isset($_POST['submit'])) {
-    $sub_judul = $_POST['sub_judul'];
-    $judul = $_POST['judul'];
-    $deskripsi = $_POST['deskripsi'];
+    $sub_judul = $mysqli->real_escape_string($_POST['sub_judul']);
+    $judul = $mysqli->real_escape_string($_POST['judul']);
+    $deskripsi = $mysqli->real_escape_string($_POST['deskripsi']);
 
     // Update data
     $update = $mysqli->query("UPDATE pendaftaran_section SET
-    sub_judul = '$sub_judul',
-    judul = '$judul',
-    deskripsi = '$deskripsi'
-    WHERE id = {$data['id']}
+        sub_judul = '$sub_judul',
+        judul = '$judul',
+        deskripsi = '$deskripsi'
+        WHERE id = {$data['id']}
     ");
 
     if ($update) {
@@ -32,49 +32,73 @@ if (isset($_POST['submit'])) {
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Kelola Pendaftaran Section</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+
 </head>
 
-<body class="bg-gray-100 min-h-screen">
+<body class="bg-gray-50 min-h-screen p-6">
 
-    <div class="container mx-auto px-4 py-12">
-        <div class="bg-white rounded-xl shadow-lg p-8 max-w-3xl mx-auto">
-            <h1 class="text-2xl font-bold text-gray-800 mb-6 text-center">Kelola Bagian Pendaftaran Santri</h1>
+    <section id="kelola_pendaftaran_section" class="bg-slate-100 w-full dark:bg-dark">
+        <!-- Header disamakan -->
+        <header class="fixed top-0 left-0 right-0 z-40 bg-white shadow-md p-4 flex justify-between items-center ml-64">
+            <button onclick="toggleSidebar()" class="text-gray-500 focus:outline-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                </svg>
+            </button>
+            <h2 class="text-2xl font-bold text-gray-700">Kelola Pendaftaran Santri</h2>
+            <h3 class="text-md font-medium text-secondary md:text-lg"></h3>
+        </header>
 
-            <form method="POST" class="space-y-6">
+        <!-- Konten disamakan dengan ml-64 dan pt-20 -->
+        <div class="ml-64 pt-20 bg-white p-6 rounded-lg shadow-lg dark:bg-slate-800">
+            <h1 class="text-xl font-semibold mb-6">Halaman Untuk Kelola Section Pendaftaran Santri</h1>
+            <form method="POST" class="space-y-4">
                 <div>
-                    <label for="sub_judul" class="block font-medium text-gray-700 mb-1">Sub Judul</label>
+                    <label for="sub_judul" class="block font-medium mb-1">Sub Judul</label>
                     <input type="text" id="sub_judul" name="sub_judul"
-                        value="<?= htmlspecialchars($data['sub_judul']); ?>"
-                        class="w-full border border-gray-300 rounded-lg shadow-sm p-3 focus:ring focus:ring-blue-200"
+                        value="<?= htmlspecialchars($data['sub_judul']); ?>" class="w-full border rounded px-3 py-2"
                         required>
                 </div>
 
                 <div>
-                    <label for="judul" class="block font-medium text-gray-700 mb-1">Judul</label>
+                    <label for="judul" class="block font-medium mb-1">Judul</label>
                     <input type="text" id="judul" name="judul" value="<?= htmlspecialchars($data['judul']); ?>"
-                        class="w-full border border-gray-300 rounded-lg shadow-sm p-3 focus:ring focus:ring-blue-200"
-                        required>
+                        class="w-full border rounded px-3 py-2" required>
                 </div>
 
                 <div>
-                    <label for="deskripsi" class="block font-medium text-gray-700 mb-1">Deskripsi</label>
-                    <textarea id="deskripsi" name="deskripsi" rows="5"
-                        class="w-full border border-gray-300 rounded-lg shadow-sm p-3 focus:ring focus:ring-blue-200"
+                    <label for="deskripsi" class="block font-medium mb-1">Deskripsi</label>
+                    <textarea id="deskripsi" name="deskripsi" rows="5" class="w-full border rounded px-3 py-2"
                         required><?= htmlspecialchars($data['deskripsi']); ?></textarea>
                 </div>
 
-                <div class="text-center">
-                    <button type="submit" name="submit"
-                        class="bg-blue-600 text-white px-6 py-3 rounded-lg shadow hover:bg-blue-700 transition-all">
-                        Simpan Perubahan
-                    </button>
-                </div>
+                <button type="submit" name="submit"
+                    class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded">Simpan</button>
             </form>
         </div>
-    </div>
+    </section>
+
+
+    <script>
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const headers = document.querySelectorAll('header');
+            const contents = document.querySelectorAll('section > div');
+
+            if (sidebar.classList.contains('-ml-64')) {
+                sidebar.classList.remove('-ml-64');
+                headers.forEach(h => h.classList.add('ml-64'));
+                contents.forEach(c => c.classList.add('ml-64'));
+            } else {
+                sidebar.classList.add('-ml-64');
+                headers.forEach(h => h.classList.remove('ml-64'));
+                contents.forEach(c => c.classList.remove('ml-64'));
+            }
+        }
+</script>
 
 </body>
 
